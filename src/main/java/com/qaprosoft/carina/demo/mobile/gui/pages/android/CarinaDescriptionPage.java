@@ -3,9 +3,13 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.android;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType.Type;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = CarinaDescriptionPageBase.class)
 public class CarinaDescriptionPage extends CarinaDescriptionPageBase {
@@ -31,6 +35,9 @@ public class CarinaDescriptionPage extends CarinaDescriptionPageBase {
     @FindBy(className = "android.widget.ImageButton")
     private ExtendedWebElement leftMenuButton;
 
+//    @ExtendedFindBy(androidUIAutomator = "new UiSelector().description(\"Navigate up\")")
+//    private ExtendedWebElement leftMenuButton;
+
     public CarinaDescriptionPage(WebDriver driver) {
         super(driver);
     }
@@ -51,6 +58,7 @@ public class CarinaDescriptionPage extends CarinaDescriptionPageBase {
 
     @Override
     public MapsPageBase navigateToMapPage() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(leftMenuButton.getBy()), 10);
         leftMenuButton.click();
         mapLink.click();
         return initPage(getDriver(), MapsPageBase.class);
@@ -67,5 +75,4 @@ public class CarinaDescriptionPage extends CarinaDescriptionPageBase {
     public boolean isPageOpened() {
         return webViewContent.isElementPresent();
     }
-
 }

@@ -1,7 +1,9 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.android;
 
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.WebViewPageBase;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,26 +13,45 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.CarinaDescriptionPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
 
-    @FindBy(id = "name")
+//    @FindBy(id = "name")
+//    private ExtendedWebElement nameInputField;
+
+//    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/login_button\")")
+//    private ExtendedWebElement loginBtn;
+
+    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/name\")")
     private ExtendedWebElement nameInputField;
 
     @FindBy(xpath = "//*[@text='CARINA']")
     private ExtendedWebElement title;
 
-    @FindBy(id = "password")
+    //    @FindBy(id = "password")
+//    private ExtendedWebElement passwordInputField;
+    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/password\")")
     private ExtendedWebElement passwordInputField;
 
-    @FindBy(id = "radio_male")
+//    @FindBy(id = "radio_male")
+//    private ExtendedWebElement maleRadioBtn;
+
+    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/radio_male\")")
     private ExtendedWebElement maleRadioBtn;
 
-    @FindBy(id = "radio_female")
+//    @FindBy(id = "radio_female")
+//    private ExtendedWebElement femaleRadioBtn;
+
+    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/radio_female\")")
     private ExtendedWebElement femaleRadioBtn;
 
-    @FindBy(id = "checkbox")
+//    @FindBy(id = "checkbox")
+//    private ExtendedWebElement privacyPolicyCheckbox;
+
+    @ExtendedFindBy(androidUIAutomator = "new UiSelector().resourceIdMatches(\".*id/checkbox\")")
     private ExtendedWebElement privacyPolicyCheckbox;
 
     @FindBy(id = "login_button")
@@ -116,11 +137,13 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public CarinaDescriptionPageBase clickLoginBtn() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(loginBtn.getBy()), 10);
         loginBtn.click();
         return initPage(getDriver(), CarinaDescriptionPageBase.class);
     }
 
     public WebViewPageBase clickLoginButton() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(loginBtn.getBy()), 10);
         loginBtn.click();
         return initPage(getDriver(), WebViewPageBase.class);
     }
