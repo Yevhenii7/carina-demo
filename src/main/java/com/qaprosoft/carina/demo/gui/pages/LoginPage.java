@@ -42,21 +42,21 @@ public class LoginPage extends AbstractPage {
         return new HomePage(getDriver());
     }
 
-    public HomePage loginWithWrongEmail(User user) {
+    public LoginFailedPage loginWithWrongEmail(User user) {
         iconLogin.click();
         inputEmail.type(user.getWrongEmail());
         inputPassword.type(user.getPassword());
         loginBtn.click();
         LOGGER.info("Login is not performed");
-        return new HomePage(getDriver());
+        return new LoginFailedPage(getDriver());
     }
 
-    public HomePage loginWithWrongPassword(User user) {
+    public LoginFailedPage loginWithWrongPassword(User user) {
         iconLogin.click();
         inputEmail.type(user.getEmail());
         inputPassword.type(user.getWrongPassword());
         loginBtn.click();
         LOGGER.info("Login is not performed");
-        return new HomePage(getDriver());
+        return new LoginFailedPage(getDriver());
     }
 }

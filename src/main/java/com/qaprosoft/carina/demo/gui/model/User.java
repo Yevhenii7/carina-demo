@@ -21,10 +21,6 @@ public class User {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -45,16 +41,8 @@ public class User {
         return wrongEmail;
     }
 
-    public void setWrongEmail(String wrongEmail) {
-        this.wrongEmail = wrongEmail;
-    }
-
     public String getWrongPassword() {
         return wrongPassword;
-    }
-
-    public void setWrongPassword(String wrongPassword) {
-        this.wrongPassword = wrongPassword;
     }
 
     @Override
