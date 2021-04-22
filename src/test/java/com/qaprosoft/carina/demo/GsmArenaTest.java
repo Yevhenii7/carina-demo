@@ -27,7 +27,6 @@ public class GsmArenaTest extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-
         HeaderMenu headerMenu = homePage.getHeaderMenu();
         softAssert.assertTrue(headerMenu.isBurgerMenuPresent(), "Burger menu is not present");
         softAssert.assertTrue(headerMenu.isLogoPresent(), "Logo is not present");
@@ -103,14 +102,12 @@ public class GsmArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(userCreator);
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
-
         final String searchQ = "iphone";
         String resultSearch = "Results for \"" + searchQ + "\"";
         List<NewsItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
         Assert.assertEquals(newsPage.getTitleOnNewsPage(), resultSearch, "Titles are not equals");
         for (NewsItem newsItem : news) {
-            System.out.println(newsItem.readTitle());
             Assert.assertTrue(StringUtils.containsIgnoreCase(newsItem.readTitle(), searchQ));
         }
     }

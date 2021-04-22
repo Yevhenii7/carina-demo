@@ -55,5 +55,4 @@ public class LoginForm extends AbstractPage {
     public boolean isLoginFormPresent() {
         return loginForm.isPresent();
     }
-
 }
