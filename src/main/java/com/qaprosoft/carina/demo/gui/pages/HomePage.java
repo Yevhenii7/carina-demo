@@ -21,7 +21,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
-import com.qaprosoft.carina.demo.gui.components.compare.HeaderMenu;
+import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -44,9 +44,6 @@ public class HomePage extends AbstractPage {
 
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
-
-    @FindBy(xpath = "//a[@class='signup-icon no-margin-right']")
-    private ExtendedWebElement textLoggedInUser;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -77,9 +74,5 @@ public class HomePage extends AbstractPage {
 
     public WeValuePrivacyAd getWeValuePrivacyAd() {
         return new WeValuePrivacyAd(driver);
-    }
-
-    public boolean isIconUserLogOutPresent() {
-        return textLoggedInUser.isElementPresent();
     }
 }

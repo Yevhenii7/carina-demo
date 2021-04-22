@@ -1,12 +1,16 @@
-package com.qaprosoft.carina.demo.gui.components.compare;
+package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.qaprosoft.carina.demo.gui.pages.LoginForm;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class HeaderMenu extends AbstractUIObject {
+
+    @FindBy(css = ".lines-button.minus.focused")
+    private ExtendedWebElement burgerMenu;
 
     @FindBy(id = "logo")
     private ExtendedWebElement logo;
@@ -38,8 +42,18 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(css = ".head-icon.icon-user-plus")
     private ExtendedWebElement userIcon;
 
+    @FindBy(css = ".head-icon.icon-login")
+    private ExtendedWebElement iconLogin;
+
+    @FindBy(xpath = "//a[@class='signup-icon no-margin-right']")
+    private ExtendedWebElement logOutIcon;
+
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
+    }
+
+    public boolean isBurgerMenuPresent() {
+        return burgerMenu.isPresent();
     }
 
     public boolean isLogoPresent() {
@@ -80,5 +94,13 @@ public class HeaderMenu extends AbstractUIObject {
 
     public boolean isUserIconPresent() {
         return userIcon.isElementPresent();
+    }
+
+    public LoginForm openLoginForm() {
+        iconLogin.click();
+        return new LoginForm(driver);
+    }
+    public boolean isIconLogOutPresent() {
+        return logOutIcon.isElementPresent();
     }
 }
