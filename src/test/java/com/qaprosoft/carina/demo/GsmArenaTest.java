@@ -51,7 +51,7 @@ public class GsmArenaTest extends AbstractTest {
         LoginForm loginForm = homePage.getHeaderMenu().openLoginForm();
         Assert.assertTrue(loginForm.isLoginFormPresent(), "Login form is not present");
         loginForm.login(userCreator);
-        Assert.assertTrue(homePage.getHeaderMenu().isIconLogOutPresent(), "Nickname is not correct");
+        Assert.assertTrue(homePage.getHeaderMenu().isIconLogOutPresent(), "Icon LogOut is not present");
     }
 
     @Test(description = "JIRA#AUTO-0003")
@@ -103,27 +103,12 @@ public class GsmArenaTest extends AbstractTest {
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
         final String searchQ = "iphone";
+        String resultSearch = "Results for \"" + searchQ + "\"";
         List<NewsItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
-        Assert.assertEquals(newsPage.getFirstArticleFromNewsPage(), RESULT_FOR_IPHONE, "Titles are not equals");
+        Assert.assertEquals(newsPage.getFirstArticleFromNewsPage(), resultSearch, "Titles are not equals");
         for (NewsItem newsItem : news) {
             Assert.assertTrue(StringUtils.containsIgnoreCase(newsItem.readTitle(), searchQ), "Invalid search results!");
         }
     }
 }
-//    @Test(description = "JIRA#AUTO-0007")
-//    @MethodOwner(owner = "Kolchyba Yevhenii")
-//    public void findSpecificDevicesTest() {
-//        LoginService loginService = new LoginService();
-//        UserCreator userCreator = new UserCreator();
-//        HomePage homePage = loginService.login(userCreator);
-//        AllBrandsPage allBrandsPage = homePage.getSliderMenu().clickAllBrandsLink();
-//        Assert.assertEquals(allBrandsPage.getArticleTitle(), ALL_MOBILE_PHONE_BRANDS_TITLE, "Article titles are not the same");
-//        ApplePage applePage = allBrandsPage.clickAppleLink();
-//        Assert.assertEquals(applePage.getArticleTitle(), ARTICLE_TITLE_IPHONE, "Article titles are not the sam");
-//        applePage.clickIconCompare();
-//        applePage.selectModels("0", "1", "2");
-//        CompareModelsPage compareModelsPage = applePage.clickIcon();
-//        Assert.assertTrue(compareModelsPage.isPageOpened());
-//    }
-
