@@ -100,7 +100,13 @@ public class HeaderMenu extends AbstractUIObject {
         iconLogin.click();
         return new LoginForm(driver);
     }
+
     public boolean isIconLogOutPresent() {
         return logOutIcon.isElementPresent();
     }
+
+//    public String getUserNickname() {
+//        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//        return (String) js.executeScript("document.querySelectorAll('.icon-count',':before')[6].textContent");
+//    }
 }

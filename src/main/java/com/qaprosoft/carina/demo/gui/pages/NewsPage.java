@@ -18,12 +18,15 @@ package com.qaprosoft.carina.demo.gui.pages;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class NewsPage extends AbstractPage {
+
+    private static final Logger LOGGER = Logger.getLogger(NewsPage.class);
 
     @FindBy(className = "searchFor")
     private ExtendedWebElement searchTextField;
@@ -34,11 +37,8 @@ public class NewsPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='news-item']")
     private List<NewsItem> news;
 
-    @FindBy(xpath = "//h3[text()='RedMagic Watch now available globally']")
-    private ExtendedWebElement firstArticle;
-
-    @FindBy(xpath = "//h1[@class='article-info-name']")
-    private ExtendedWebElement titleOnNewsPage;
+    @FindBy(xpath = "//div[@class='news-item'][1]/a/h3")
+    private ExtendedWebElement firstTitleOnNewsPage;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -51,12 +51,13 @@ public class NewsPage extends AbstractPage {
         return news;
     }
 
-    public ArticlePage clickLinkFirstArticle() {
-        firstArticle.click();
+    public ArticlePage clickFirstArticleFromNewsPage() {
+        firstTitleOnNewsPage.click();
         return new ArticlePage(getDriver());
     }
 
-    public String getTitleOnNewsPage() {
-        return titleOnNewsPage.getText();
+    public String getFirstArticleFromNewsPage() {
+        LOGGER.info("First title on News Page " + firstTitleOnNewsPage.getText());
+        return firstTitleOnNewsPage.getText();
     }
 }
