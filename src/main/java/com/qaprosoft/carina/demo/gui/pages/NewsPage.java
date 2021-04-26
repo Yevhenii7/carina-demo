@@ -15,35 +15,49 @@
  */
 package com.qaprosoft.carina.demo.gui.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class NewsPage extends AbstractPage {
-    
-    @FindBy(className="searchFor")
+
+    private static final Logger LOGGER = Logger.getLogger(NewsPage.class);
+
+    @FindBy(className = "searchFor")
     private ExtendedWebElement searchTextField;
-    
-    @FindBy(xpath="//input[@value='Search']")
+
+    @FindBy(xpath = "//input[@value='Search']")
     private ExtendedWebElement searchButton;
-    
-    @FindBy(xpath="//div[@class='news-item']")
+
+    @FindBy(xpath = "//div[@class='news-item']")
     private List<NewsItem> news;
-    
+
+    @FindBy(xpath = "//div[@class='news-item'][1]/a/h3")
+    private ExtendedWebElement firstTitleOnNewsPage;
+
     public NewsPage(WebDriver driver) {
         super(driver);
         setPageURL("/news.php3");
     }
-    
+
     public List<NewsItem> searchNews(String q) {
         searchTextField.type(q);
         searchButton.click();
         return news;
     }
-    
+
+    public ArticlePage clickFirstArticleFromNewsPage() {
+        firstTitleOnNewsPage.click();
+        return new ArticlePage(getDriver());
+    }
+
+    public String getFirstArticleFromNewsPage() {
+        LOGGER.info("First title on News Page " + firstTitleOnNewsPage.getText());
+        return firstTitleOnNewsPage.getText();
+    }
 }

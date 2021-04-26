@@ -24,13 +24,13 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 
 public class NewsItem extends AbstractUIObject {
 
-    @FindBy(xpath="./a")
+    @FindBy(xpath = "./a")
     public ExtendedWebElement titleLink;
-    
+
     public NewsItem(WebDriver driver, SearchContext sc) {
         super(driver, sc);
     }
-    
+
     public String readTitle() {
         return titleLink.getElement().getText();
     }
