@@ -7,6 +7,7 @@ public class UserCreator {
 
     public User getUser() {
         User user = new User();
+        user.setNickname(R.TESTDATA.get("nickname"));
         user.setEmail(R.TESTDATA.get("email"));
         user.setPassword(R.TESTDATA.get("password"));
         return user;

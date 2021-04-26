@@ -18,16 +18,13 @@ package com.qaprosoft.carina.demo.gui.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qaprosoft.carina.core.foundation.utils.Configuration;
-import com.qaprosoft.carina.core.foundation.utils.R;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.components.compare.CondidateBlock;
+import com.qaprosoft.carina.demo.gui.components.compare.CompareBlock;
 import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs;
 
 public class CompareModelsPage extends AbstractPage {
@@ -35,7 +32,7 @@ public class CompareModelsPage extends AbstractPage {
     private final String comparePageUrl = "https://www.gsmarena.com/compare.php3";
 
     @FindBy(xpath = "//div[contains(@class, 'candidate-search')]")
-    private List<CondidateBlock> condidateBlocks;
+    private List<CompareBlock> compareBlocks;
 
     @FindBy(className = "compare-candidates")
     private ExtendedWebElement compareMenu;
@@ -48,14 +45,14 @@ public class CompareModelsPage extends AbstractPage {
     }
 
     public List<ModelSpecs> compareModels(String... models) {
-        CondidateBlock condidateBlock;
+        CompareBlock compareBlock;
         List<ModelSpecs> modelSpecs = new ArrayList<>();
         ModelSpecs modelSpec;
         for (int index = 0; index < models.length; index++) {
             modelSpec = new ModelSpecs();
-            condidateBlock = condidateBlocks.get(index);
-            condidateBlock.sendKeysToInputField(models[index]);
-            condidateBlock.getFirstPhone();
+            compareBlock = compareBlocks.get(index);
+            compareBlock.sendKeysToInputField(models[index]);
+            compareBlock.getFirstPhone();
             for (ModelSpecs.SpecType type : ModelSpecs.SpecType.values()) {
                 ExtendedWebElement spec = findExtendedWebElement(By.xpath(
                         String.format("//tr[.//a[text()='%s']]//td[@class='nfo'][%d]", type.getType(), index + 1)));

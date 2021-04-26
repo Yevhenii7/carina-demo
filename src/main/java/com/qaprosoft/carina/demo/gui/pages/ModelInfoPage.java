@@ -22,6 +22,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public class ModelInfoPage extends AbstractPage {
+
     @FindBy(css = ".help-display strong")
     private ExtendedWebElement displayInfoLabel;
 
