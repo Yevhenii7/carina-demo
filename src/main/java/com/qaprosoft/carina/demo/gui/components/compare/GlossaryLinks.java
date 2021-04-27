@@ -8,7 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GlossaryLinks extends AbstractUIObject {
 
@@ -19,8 +21,8 @@ public class GlossaryLinks extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public List<String> readTitle() {
-        List<String> titles = new ArrayList<>();
+    public Set<String> readTitle() {
+        Set<String> titles = new HashSet<>();
         for (ExtendedWebElement element : titleLinks)
             titles.add(element.getText().toUpperCase());
         return titles;

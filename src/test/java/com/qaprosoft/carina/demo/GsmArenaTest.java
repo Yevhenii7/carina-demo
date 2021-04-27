@@ -2,10 +2,8 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
-import com.qaprosoft.carina.demo.gui.components.compare.GlossaryLinks;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
@@ -16,7 +14,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
 
@@ -121,8 +118,18 @@ public class GsmArenaTest extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
-        Assert.assertEquals(glossaryPage.getTitleGlossaryPage(), GLOSSARY_PAGE, "Glossary page is not opened");
+        Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
         Assert.assertTrue(glossaryPage.isParagraphHeaderSizeAndGlossaryListSizeAreEquals(), "Size are not equals");
         Assert.assertTrue(glossaryPage.verifyTitlesFirstLetter(), "Titles are not sorted by alphabet");
+    }
+
+    @Test(description = "JIRA#AUTO-0009")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyGlossaryParagraphTextByAlphabetTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTestByAlphabet(), "Glossary paragraph text is not by alphabet");
     }
 }

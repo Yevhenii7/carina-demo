@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Set;
 
 public class GlossaryPage extends AbstractPage {
 
@@ -26,9 +27,8 @@ public class GlossaryPage extends AbstractPage {
         super(driver);
     }
 
-    public String getTitleGlossaryPage() {
-        LOGGER.info("Title from Glossary page - " + title.getText());
-        return title.getText();
+    public boolean isPageOpened() {
+        return title.isElementPresent();
     }
 
     public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
@@ -41,7 +41,7 @@ public class GlossaryPage extends AbstractPage {
 
     public boolean verifyTitlesFirstLetter() {
         for (int i = 0; i < glossaryLinks.size(); i++) {
-            List<String> links = glossaryLinks.get(i).readTitle();
+            Set<String> links = glossaryLinks.get(i).readTitle();
             for (String elements : links) {
                 if (!(elements.charAt(0) == glossaryTitles.get(i).getText().charAt(0))) {
                     if (!(Character.isDigit(elements.charAt(0))
@@ -51,6 +51,17 @@ public class GlossaryPage extends AbstractPage {
                 }
             }
             LOGGER.info("The first symbol matches the title " + glossaryTitles.get(i).getText());
+        }
+        return true;
+    }
+
+    public boolean verifyGlossaryParagraphTestByAlphabet() {
+        for (GlossaryLinks glossaryLinks : glossaryLinks) {
+            Set<String> linkList = glossaryLinks.readTitle();
+            LOGGER.info(linkList);
+            if (!linkList.equals(glossaryLinks.readTitle())) {
+                return false;
+            }
         }
         return true;
     }
