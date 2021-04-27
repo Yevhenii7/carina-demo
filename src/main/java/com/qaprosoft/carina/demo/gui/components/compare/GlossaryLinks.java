@@ -17,8 +17,8 @@ public class GlossaryLinks extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public Set<String> readTitle() {
-        Set<String> titles = new TreeSet<>();
+    public List<String> readTitle() {
+        List<String> titles = new ArrayList<>();
         for (ExtendedWebElement element : titleLinks)
             titles.add(element.getText().toUpperCase());
         return titles;
