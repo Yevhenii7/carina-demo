@@ -130,6 +130,6 @@ public class GsmArenaTest extends AbstractTest {
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
-        Assert.assertFalse(glossaryPage.verifyGlossaryParagraphTestByAlphabet(), "Glossary paragraph text is not by alphabet");
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTestByAlphabet(), "Glossary paragraph text is not by alphabet");
     }
 }

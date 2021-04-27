@@ -17,18 +17,12 @@ public class GlossaryPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='st-text']/h3")
     private List<ExtendedWebElement> glossaryTitles;
 
-    @FindBy(xpath = "//div[@class='article-hgroup']/child::h1")
-    private ExtendedWebElement title;
-
     @FindBy(xpath = "//div[@class='st-text']/p")
     private List<GlossaryLinks> glossaryLinks;
 
     public GlossaryPage(WebDriver driver) {
         super(driver);
-    }
-
-    public boolean isPageOpened() {
-        return title.isElementPresent();
+        setPageURL("/glossary.php3");
     }
 
     public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
