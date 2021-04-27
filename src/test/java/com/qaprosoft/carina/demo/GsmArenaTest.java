@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
 
@@ -121,9 +122,7 @@ public class GsmArenaTest extends AbstractTest {
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertEquals(glossaryPage.getTitleGlossaryPage(), GLOSSARY_PAGE, "Glossary page is not opened");
-        List<ExtendedWebElement> letters = glossaryPage.getAllLetters();
-        List<GlossaryLinks> glossaryLinks = glossaryPage.getParagraphLinks();
-        Assert.assertEquals(glossaryLinks.size(), letters.size(), "Size is not match");
+        Assert.assertTrue(glossaryPage.isParagraphHeaderSizeAndGlossaryListSizeAreEquals(), "Size are not equals");
         Assert.assertTrue(glossaryPage.verifyTitlesFirstLetter(), "Titles are not sorted by alphabet");
     }
 }

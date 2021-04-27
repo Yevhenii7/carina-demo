@@ -16,6 +16,9 @@ public class GlossaryPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='st-text']/h3")
     private List<ExtendedWebElement> glossaryTitles;
 
+    @FindBy(xpath = "//div[@class='article-hgroup']/child::h1")
+    private ExtendedWebElement title;
+
     @FindBy(xpath = "//div[@class='st-text']/p")
     private List<GlossaryLinks> glossaryLinks;
 
@@ -24,12 +27,12 @@ public class GlossaryPage extends AbstractPage {
     }
 
     public String getTitleGlossaryPage() {
-        LOGGER.info("Title from Glossary page - " + getDriver().getTitle());
-        return getDriver().getTitle();
+        LOGGER.info("Title from Glossary page - " + title.getText());
+        return title.getText();
     }
 
-    public List<ExtendedWebElement> getAllLetters() {
-        return glossaryTitles;
+    public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
+        return glossaryLinks.size() == glossaryTitles.size();
     }
 
     public List<GlossaryLinks> getParagraphLinks() {
