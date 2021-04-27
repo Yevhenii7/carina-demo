@@ -26,9 +26,8 @@ public class GlossaryPage extends AbstractPage {
         super(driver);
     }
 
-    public String getTitleGlossaryPage() {
-        LOGGER.info("Title from Glossary page - " + title.getText());
-        return title.getText();
+    public boolean isPageOpened() {
+        return title.isElementPresent();
     }
 
     public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
