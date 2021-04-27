@@ -16,7 +16,7 @@ public class GlossaryPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='st-text']/h3")
     private List<ExtendedWebElement> glossaryTitles;
 
-    @FindBy(xpath = "//div[@class='article-hgroup']/child::h1")
+    @FindBy(xpath = "//h1[@class='article-info-name' and contains(text(),'Mobile terms glossary')]")
     private ExtendedWebElement title;
 
     @FindBy(xpath = "//div[@class='st-text']/p")
