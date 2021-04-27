@@ -2,8 +2,10 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.compare.GlossaryLinks;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
@@ -94,7 +96,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(articlePage.getArticleTitle(), titleNews, "Articles are not the same");
     }
 
-    @Test(description = "JIRA#AUTO-0006")
+    @Test(description = "JIRA#AUTO-0007")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySearchingProcessTest() {
         LoginService loginService = new LoginService();
@@ -110,5 +112,18 @@ public class GsmArenaTest extends AbstractTest {
         for (NewsItem newsItem : news) {
             Assert.assertTrue(StringUtils.containsIgnoreCase(newsItem.readTitle(), searchQ), "Invalid search results!");
         }
+    }
+
+    @Test(description = "JIRA#AUTO-0008")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyGlossaryParagraphTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertEquals(glossaryPage.getTitleGlossaryPage(), GLOSSARY_PAGE, "Glossary page is not opened");
+        List<ExtendedWebElement> letters = glossaryPage.getAllLetters();
+        List<GlossaryLinks> glossaryLinks = glossaryPage.getParagraphLinks();
+        Assert.assertEquals(glossaryLinks.size(), letters.size(), "Size is not match");
+        Assert.assertTrue(glossaryPage.verifyTitlesFirstLetter(), "Titles are not sorted by alphabet");
     }
 }
