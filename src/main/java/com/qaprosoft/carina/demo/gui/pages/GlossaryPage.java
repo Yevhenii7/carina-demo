@@ -53,9 +53,9 @@ public class GlossaryPage extends AbstractPage {
             List<String> linkList = glossaryLink.readTitle();
             for (int j = 0; j < linkList.size() - 1; j++) {
                 if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) < 0) {
-                    LOGGER.info("Glossary paragraph text by alphabet " + linkList.get(j));
+                    LOGGER.info("Glossary paragraph text: [" + linkList.get(j) + "] [" + linkList.get(j + 1) + "] by alphabet!");
                 } else if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) > 0) {
-                    LOGGER.error("Glossary paragraph text is not by alphabet " + linkList.get(j));
+                    LOGGER.error("Glossary paragraph text: [" + linkList.get(j) + "] [" + linkList.get(j + 1) + " " + "] is not by alphabet!");
                     return false;
                 }
             }
