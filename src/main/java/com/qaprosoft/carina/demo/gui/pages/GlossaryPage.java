@@ -16,18 +16,12 @@ public class GlossaryPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='st-text']/h3")
     private List<ExtendedWebElement> glossaryTitles;
 
-    @FindBy(xpath = "//h1[@class='article-info-name' and contains(text(),'Mobile terms glossary')]")
-    private ExtendedWebElement title;
-
     @FindBy(xpath = "//div[@class='st-text']/p")
     private List<GlossaryLinks> glossaryLinks;
 
     public GlossaryPage(WebDriver driver) {
         super(driver);
-    }
-
-    public boolean isPageOpened() {
-        return title.isElementPresent();
+        setPageURL("/glossary.php3");
     }
 
     public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
@@ -50,6 +44,21 @@ public class GlossaryPage extends AbstractPage {
                 }
             }
             LOGGER.info("The first symbol matches the title " + glossaryTitles.get(i).getText());
+        }
+        return true;
+    }
+
+    public boolean verifyGlossaryParagraphTestByAlphabet() {
+        for (GlossaryLinks glossaryLink : glossaryLinks) {
+            List<String> linkList = glossaryLink.readTitle();
+            for (int j = 0; j < linkList.size() - 1; j++) {
+                if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) < 0) {
+                    LOGGER.info("Glossary paragraph text: [" + linkList.get(j) + "] [" + linkList.get(j + 1) + "] by alphabet!");
+                } else if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) > 0) {
+                    LOGGER.error("Glossary paragraph text: [" + linkList.get(j) + "] [" + linkList.get(j + 1) + " " + "] is not by alphabet!");
+                    return false;
+                }
+            }
         }
         return true;
     }
