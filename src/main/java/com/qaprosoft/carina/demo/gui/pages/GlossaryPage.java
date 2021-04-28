@@ -32,23 +32,24 @@ public class GlossaryPage extends AbstractPage {
         return glossaryLinks;
     }
 
-    public boolean verifyTitlesFirstLetter() {
+    public boolean verifyGlossaryParagraphHeaderAndTextByFirstLettersAndNumbers() {
         for (int i = 0; i < glossaryLinks.size(); i++) {
             List<String> links = glossaryLinks.get(i).readTitle();
             for (String elements : links) {
-                if (!(elements.charAt(0) == glossaryTitles.get(i).getText().charAt(0))) {
-                    if (!(Character.isDigit(elements.charAt(0))
-                            && Character.isDigit(glossaryTitles.get(i).getText().charAt(0)))) {
+                if (!(glossaryTitles.get(i).getText().charAt(0) == (elements.charAt(0)))) {
+                    if (!(Character.isDigit(glossaryTitles.get(i).getText().charAt(0))
+                            && Character.isDigit(elements.charAt(0)))) {
+                        LOGGER.error("Glossary paragraph header: [" + glossaryTitles.get(i).getText().charAt(0) + "] does not match first number or letter [" + elements.charAt(0) + "]");
                         return false;
                     }
                 }
+                LOGGER.info("Glossary paragraph header: [" + glossaryTitles.get(i).getText() + "] match first number or letter [" + elements.charAt(0) + "]");
             }
-            LOGGER.info("The first symbol matches the title " + glossaryTitles.get(i).getText());
         }
         return true;
     }
 
-    public boolean verifyGlossaryParagraphTestByAlphabet() {
+    public boolean verifyGlossaryParagraphTextByAlphabet() {
         for (GlossaryLinks glossaryLink : glossaryLinks) {
             List<String> linkList = glossaryLink.readTitle();
             for (int j = 0; j < linkList.size() - 1; j++) {

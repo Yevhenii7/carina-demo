@@ -10,6 +10,7 @@ import com.qaprosoft.carina.demo.gui.service.UserCreator;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,7 +20,7 @@ import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
 
 public class GsmArenaTest extends AbstractTest {
 
-    @Test(description = "JIRA#AUTO-0001")
+    @Test(description = "JIRA#AUTO-0001",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyHeaderComponents() {
         SoftAssert softAssert = new SoftAssert();
@@ -41,7 +42,7 @@ public class GsmArenaTest extends AbstractTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "JIRA#AUTO-0002")
+    @Test(description = "JIRA#AUTO-0002",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySuccessLogin() {
         UserCreator userCreator = new UserCreator();
@@ -67,7 +68,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(loginPage.loginFailed(), GSM_ARENA_LOGIN_FAILED_EMAIL, "Login is not failed");
     }
 
-    @Test(description = "JIRA#AUTO-0004")
+    @Test(description = "JIRA#AUTO-0004",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidPassword() {
         UserCreator userCreator = new UserCreator();
@@ -88,25 +89,25 @@ public class GsmArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(userCreator);
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
-        String titleNews = newsPage.getFirstArticleFromNewsPage();
+        String titleNews = newsPage.getTitleFromNewsPage();
         ArticlePage articlePage = newsPage.clickFirstArticleFromNewsPage();
         Assert.assertTrue(articlePage.isPageOpened(), "Article page is not opened");
         Assert.assertEquals(articlePage.getArticleTitle(), titleNews, "Articles are not the same");
     }
 
-    @Test(description = "JIRA#AUTO-0007")
+    @Test(description = "JIRA#DEMO-0007")
+    @Parameters({"searchKey"})
     @MethodOwner(owner = "Kolchyba Yevhenii")
-    public void verifySearchingProcessTest() {
+    public void verifySearchingProcessTest(String searchQ) {
         LoginService loginService = new LoginService();
         UserCreator userCreator = new UserCreator();
         HomePage homePage = loginService.login(userCreator);
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
-        final String searchQ = "iphone";
         String resultSearch = "Results for \"" + searchQ + "\"";
         List<NewsItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
-        Assert.assertEquals(newsPage.getFirstArticleFromNewsPage(), resultSearch, "Titles are not equals");
+        Assert.assertEquals(newsPage.getTitleFromNewsPage(), resultSearch, "Titles are not equals");
         for (NewsItem newsItem : news) {
             Assert.assertTrue(StringUtils.containsIgnoreCase(newsItem.readTitle(), searchQ), "Invalid search results!");
         }
@@ -120,16 +121,16 @@ public class GsmArenaTest extends AbstractTest {
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
         Assert.assertTrue(glossaryPage.isParagraphHeaderSizeAndGlossaryListSizeAreEquals(), "Size are not equals");
-        Assert.assertTrue(glossaryPage.verifyTitlesFirstLetter(), "Titles are not sorted by alphabet");
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphHeaderAndTextByFirstLettersAndNumbers(), "Titles are not sorted by alphabet");
     }
 
-    @Test(description = "JIRA#AUTO-0009")
+    @Test(description = "JIRA#AUTO-0009",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyGlossaryParagraphTextByAlphabetTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
-        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTestByAlphabet());
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTextByAlphabet());
     }
 }

@@ -1,9 +1,52 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Carina Demo Tests - Gsm Arena Test" verbose="1" parallel="methods">
 
-    <test name="Gsm arena test">
+    <test name="Searching Iphone">
+        <parameter name="searchKey" value="iphone"/>
         <classes>
-            <class name="com.qaprosoft.carina.demo.GsmArenaTest" />
+            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+                <methods>
+                    <include name="verifySearchingProcessTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Searching Samsung">
+        <parameter name="searchKey" value="samsung"/>
+        <classes>
+            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+                <methods>
+                    <include name="verifySearchingProcessTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Searching Asus">
+        <parameter name="searchKey" value="asus"/>
+        <classes>
+            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+                <methods>
+                    <include name="verifySearchingProcessTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Login test">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+                <methods>
+                    <include name="verifyHeaderComponents"/>
+                    <include name="verifySuccessLogin"/>
+                    <include name="verifyLoginWithInvalidEmail"/>
+                    <include name="verifyLoginWithInvalidPassword"/>
+                    <include name="verifyArticleNameTest"/>
+                    <include name="verifyGlossaryParagraphTest"/>
+                    <include name="verifyGlossaryParagraphTextByAlphabetTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

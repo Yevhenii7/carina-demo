@@ -2,15 +2,14 @@ package com.qaprosoft.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.model.User;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginForm extends AbstractPage {
-    private static final Logger LOGGER = LogManager.getRootLogger();
+
+    private static final Logger LOGGER = Logger.getLogger(GlossaryPage.class);
 
     @FindBy(id = "login-popup2")
     private ExtendedWebElement loginForm;
@@ -40,7 +39,7 @@ public class LoginForm extends AbstractPage {
         inputEmail.type(user.getUserWithInvalidEmail().getEmail());
         inputPassword.type(user.getUserWithInvalidEmail().getPassword());
         loginBtn.click();
-        LOGGER.info("Login performed");
+        LOGGER.info("Login is not performed out of invalid email!");
         return new LoginPage(getDriver());
     }
 
@@ -48,7 +47,7 @@ public class LoginForm extends AbstractPage {
         inputEmail.type(user.getUserWithInvalidPassword().getEmail());
         inputPassword.type(user.getUserWithInvalidPassword().getPassword());
         loginBtn.click();
-        LOGGER.info("Login performed");
+        LOGGER.info("Login is not performed out of invalid password!");
         return new LoginPage(getDriver());
     }
 
