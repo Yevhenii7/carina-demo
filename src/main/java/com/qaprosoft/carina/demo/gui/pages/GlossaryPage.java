@@ -48,12 +48,16 @@ public class GlossaryPage extends AbstractPage {
         return true;
     }
 
-    public boolean verifyGlossaryParagraphTestByAlphabet(int result) {
+    public boolean verifyGlossaryParagraphTestByAlphabet() {
         for (GlossaryLinks glossaryLink : glossaryLinks) {
             List<String> linkList = glossaryLink.readTitle();
             for (int j = 0; j < linkList.size() - 1; j++) {
-                LOGGER.info(linkList.get(j));
-                result = linkList.get(j).compareToIgnoreCase(linkList.get(j + 1));
+                if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) < 0) {
+                    LOGGER.info("Glossary paragraph text by alphabet " + linkList.get(j));
+                } else if (linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) > 0) {
+                    LOGGER.error("Glossary paragraph text is not by alphabet " + linkList.get(j));
+                    return false;
+                }
             }
         }
         return true;
