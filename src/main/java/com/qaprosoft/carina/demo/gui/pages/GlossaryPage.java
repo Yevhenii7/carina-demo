@@ -6,7 +6,6 @@ import com.qaprosoft.carina.demo.gui.components.compare.GlossaryLinks;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -49,12 +48,14 @@ public class GlossaryPage extends AbstractPage {
         return true;
     }
 
-    public void verifyGlossaryParagraphTestByAlphabet() {
+    public boolean verifyGlossaryParagraphTestByAlphabet(int result) {
         for (GlossaryLinks glossaryLink : glossaryLinks) {
             List<String> linkList = glossaryLink.readTitle();
             for (int j = 0; j < linkList.size() - 1; j++) {
-                Assert.assertTrue(linkList.get(j).compareToIgnoreCase(linkList.get(j + 1)) < 0, "Glossary paragraph text is not by alphabet");
+                LOGGER.info(linkList.get(j));
+                result = linkList.get(j).compareToIgnoreCase(linkList.get(j + 1));
             }
         }
+        return true;
     }
 }
