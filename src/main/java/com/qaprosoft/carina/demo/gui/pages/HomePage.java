@@ -22,17 +22,16 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
-import org.apache.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 
 public class HomePage extends AbstractPage {
 
-    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(HomePage.class);
+    private static final Logger LOGGER = Logger.getLogger(HomePage.class);
 
     @FindBy(id = "footmenu")
     private FooterMenu footerMenu;

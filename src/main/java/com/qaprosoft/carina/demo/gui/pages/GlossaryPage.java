@@ -24,7 +24,7 @@ public class GlossaryPage extends AbstractPage {
         setPageURL("/glossary.php3");
     }
 
-    public boolean isParagraphHeaderSizeAndGlossaryListSizeAreEquals() {
+    public boolean isGlossaryParagraphSizeMatchesOfListSize() {
         return glossaryLinks.size() == glossaryTitles.size();
     }
 
@@ -32,19 +32,19 @@ public class GlossaryPage extends AbstractPage {
         return glossaryLinks;
     }
 
-    public boolean verifyGlossaryParagraphHeaderAndTextByFirstLettersAndNumbers() {
+    public boolean verifyGlossaryParagraphMatchesText() {
         for (int i = 0; i < glossaryLinks.size(); i++) {
             List<String> links = glossaryLinks.get(i).readTitle();
             for (String elements : links) {
                 if (!(glossaryTitles.get(i).getText().charAt(0) == (elements.charAt(0)))) {
                     if (!(Character.isDigit(glossaryTitles.get(i).getText().charAt(0))
                             && Character.isDigit(elements.charAt(0)))) {
-                        LOGGER.error("Glossary paragraph header: [" + glossaryTitles.get(i).getText().charAt(0) + "] does not match first number or letter [" + elements.charAt(0) + "]");
+                        LOGGER.error("Glossary paragraph header: [" + glossaryTitles.get(i).getText().charAt(0) + "] does not matches first number or letter [" + elements.charAt(0) + "]");
                         return false;
                     }
                 }
-                LOGGER.info("Glossary paragraph header: [" + glossaryTitles.get(i).getText() + "] match first number or letter [" + elements.charAt(0) + "]");
             }
+            LOGGER.info("Glossary paragraph header: [" + glossaryTitles.get(i).getText() + "] matches first letter or number");
         }
         return true;
     }
