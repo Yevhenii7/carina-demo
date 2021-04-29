@@ -37,8 +37,8 @@ public class NewsPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='news-item']")
     private List<NewsItem> news;
 
-    @FindBy(xpath = "//div[@class='news-item'][1]/a/h3")
-    private ExtendedWebElement firstTitleOnNewsPage;
+    @FindBy(xpath = "//h1[@class='article-info-name']")
+    private ExtendedWebElement title;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -52,12 +52,12 @@ public class NewsPage extends AbstractPage {
     }
 
     public ArticlePage clickFirstArticleFromNewsPage() {
-        firstTitleOnNewsPage.click();
+        title.click();
         return new ArticlePage(getDriver());
     }
 
-    public String getFirstArticleFromNewsPage() {
-        LOGGER.info("First title on News Page " + firstTitleOnNewsPage.getText());
-        return firstTitleOnNewsPage.getText();
+    public String getTitleFromNewsPage() {
+        LOGGER.info("First title on News Page [" + title.getText() + "]");
+        return title.getText();
     }
 }
