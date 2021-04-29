@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
 
-    private static final Logger LOGGER = Logger.getLogger(NewsPage.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginPage.class);
 
     @FindBy(xpath = "//div[@class='normal-text res-error']/child::p")
     private ExtendedWebElement textLoginFail;
@@ -21,5 +21,4 @@ public class LoginPage extends AbstractPage {
         LOGGER.info("Login result [" + textLoginFail.getText() + "]");
         return textLoginFail.getText();
     }
-
 }
