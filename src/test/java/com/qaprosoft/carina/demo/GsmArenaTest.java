@@ -20,7 +20,7 @@ import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
 
 public class GsmArenaTest extends AbstractTest {
 
-    @Test(description = "JIRA#AUTO-0001",enabled = false)
+    @Test(description = "JIRA#AUTO-0001")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyHeaderComponents() {
         SoftAssert softAssert = new SoftAssert();
@@ -42,7 +42,7 @@ public class GsmArenaTest extends AbstractTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "JIRA#AUTO-0002",enabled = false)
+    @Test(description = "JIRA#AUTO-0002")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySuccessLogin() {
         UserCreator userCreator = new UserCreator();
@@ -68,7 +68,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(loginPage.loginFailed(), GSM_ARENA_LOGIN_FAILED_EMAIL, "Login is not failed");
     }
 
-    @Test(description = "JIRA#AUTO-0004",enabled = false)
+    @Test(description = "JIRA#AUTO-0004")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidPassword() {
         UserCreator userCreator = new UserCreator();
@@ -120,11 +120,11 @@ public class GsmArenaTest extends AbstractTest {
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
-        Assert.assertTrue(glossaryPage.isParagraphHeaderSizeAndGlossaryListSizeAreEquals(), "Size are not equals");
-        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphHeaderAndTextByFirstLettersAndNumbers(), "Titles are not sorted by alphabet");
+        Assert.assertTrue(glossaryPage.isGlossaryParagraphSizeMatchesOfListSize(), "Size are not equals");
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphMatchesText(), "Titles are not sorted by alphabet");
     }
 
-    @Test(description = "JIRA#AUTO-0009",enabled = false)
+    @Test(description = "JIRA#AUTO-0009")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyGlossaryParagraphTextByAlphabetTest() {
         HomePage homePage = new HomePage(getDriver());

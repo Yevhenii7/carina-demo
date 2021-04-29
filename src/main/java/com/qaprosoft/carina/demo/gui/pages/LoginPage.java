@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
 
-    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(LoginPage.class);
+    private static final Logger LOGGER = Logger.getLogger(NewsPage.class);
 
     @FindBy(xpath = "//div[@class='normal-text res-error']/child::p")
     private ExtendedWebElement textLoginFail;
