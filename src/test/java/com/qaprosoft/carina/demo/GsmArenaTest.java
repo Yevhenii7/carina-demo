@@ -120,7 +120,7 @@ public class GsmArenaTest extends AbstractTest {
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
-        Assert.assertTrue(glossaryPage.isGlossaryParagraphSizeMatchesOfListSize(), "Size are not equals");
+        Assert.assertTrue(glossaryPage.isGlossaryParagraphSizeMatchesListSize(), "Size are not equals");
         Assert.assertTrue(glossaryPage.verifyGlossaryParagraphMatchesText(), "Titles are not sorted by alphabet");
     }
 

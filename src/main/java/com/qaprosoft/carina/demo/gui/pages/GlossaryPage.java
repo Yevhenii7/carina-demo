@@ -24,7 +24,7 @@ public class GlossaryPage extends AbstractPage {
         setPageURL("/glossary.php3");
     }
 
-    public boolean isGlossaryParagraphSizeMatchesOfListSize() {
+    public boolean isGlossaryParagraphSizeMatchesListSize() {
         return glossaryLinks.size() == glossaryTitles.size();
     }
 
