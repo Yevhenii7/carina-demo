@@ -27,6 +27,7 @@ import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 
 public class FooterMenu extends AbstractUIObject {
+
     @FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
 
