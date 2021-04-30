@@ -14,22 +14,22 @@ public class BurgerMenu extends AbstractUIObject {
     @FindBy(id = "menu")
     private ExtendedWebElement burgerMenu;
 
-    @FindBy(xpath = "//ul[@id='menu']/li[1]/a")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='Home']")
     private ExtendedWebElement homeLink;
 
-    @FindBy(xpath = "//ul[@id='menu']/li[2]/a")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='News']")
     private ExtendedWebElement newsLink;
 
-    @FindBy(xpath = "//ul[@id='menu']/li[3]/a")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='Reviews']")
     private ExtendedWebElement reviewsLink;
 
     @FindBy(xpath = "//a[text()='Videos'][1]")
     private ExtendedWebElement videosLink;
 
-    @FindBy(xpath = "//a[text()='Featured'][1]")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='Featured']")
     private ExtendedWebElement featuredLink;
 
-    @FindBy(xpath = "//ul[@id='menu']/li[6]/a")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='Phone Finder']")
     private ExtendedWebElement phoneFinderLink;
 
     @FindBy(xpath = "//a[text()='Deals'][1]")
@@ -38,7 +38,7 @@ public class BurgerMenu extends AbstractUIObject {
     @FindBy(xpath = "//a[text()='Tools'][1]")
     private ExtendedWebElement toolsLink;
 
-    @FindBy(xpath = "//ul[@id='menu']/li[9]/a")
+    @FindBy(xpath = "//ul[@id='menu']/li/a[text()='Coverage']")
     private ExtendedWebElement coverageLink;
 
     @FindBy(xpath = "//a[text()='Contact'][1]")
@@ -49,7 +49,6 @@ public class BurgerMenu extends AbstractUIObject {
     }
 
     public boolean isBurgerMenuVisible() {
-        LOGGER.info("Burger menu is visible");
         return burgerMenu.isVisible();
     }
 
