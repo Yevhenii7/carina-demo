@@ -6,7 +6,7 @@ import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class AllMenu extends AbstractUIObject {
+public class BurgerMenu extends AbstractUIObject {
 
     @FindBy(id = "menu")
     private ExtendedWebElement allMenu;
@@ -41,7 +41,7 @@ public class AllMenu extends AbstractUIObject {
     @FindBy(xpath = "//ul[@id='menu']/child::li[10]")
     private ExtendedWebElement contactLink;
 
-    public AllMenu(WebDriver driver) {
+    public BurgerMenu(WebDriver driver) {
         super(driver);
     }
 

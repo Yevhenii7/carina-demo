@@ -3,7 +3,7 @@ package com.qaprosoft.carina.demo;
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.components.AllMenu;
+import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
 import com.qaprosoft.carina.demo.gui.pages.*;
@@ -140,7 +140,7 @@ public class GsmArenaTest extends AbstractTest {
     public void verifyBurgerMenuInHeader() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        AllMenu allMenu = homePage.getHeaderMenu().clickBurgerMenu();
+        BurgerMenu allMenu = homePage.getHeaderMenu().clickBurgerMenu();
         Assert.assertTrue(allMenu.isAllMenuOpened(), "All menu is not opened");
         homePage = allMenu.openHomePage();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");

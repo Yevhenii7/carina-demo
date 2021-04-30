@@ -52,9 +52,9 @@ public class HeaderMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public AllMenu clickBurgerMenu() {
+    public BurgerMenu clickBurgerMenu() {
         burgerMenu.click();
-        return new AllMenu(driver);
+        return new BurgerMenu(driver);
     }
 
     public boolean isBurgerMenuPresent() {
