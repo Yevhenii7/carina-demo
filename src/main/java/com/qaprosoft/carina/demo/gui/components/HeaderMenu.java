@@ -3,11 +3,14 @@ package com.qaprosoft.carina.demo.gui.components;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.LoginForm;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class HeaderMenu extends AbstractUIObject {
+
+    private static final Logger LOGGER = Logger.getLogger(BurgerMenu.class);
 
     @FindBy(css = ".lines-button.minus")
     private ExtendedWebElement burgerMenu;
@@ -52,9 +55,10 @@ public class HeaderMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public AllMenu clickBurgerMenu() {
+    public BurgerMenu clickBurgerMenu() {
         burgerMenu.click();
-        return new AllMenu(driver);
+        LOGGER.info("Burger button pressed");
+        return new BurgerMenu(driver);
     }
 
     public boolean isBurgerMenuPresent() {
