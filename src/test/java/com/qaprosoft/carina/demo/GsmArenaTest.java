@@ -163,4 +163,14 @@ public class GsmArenaTest extends AbstractTest {
         ContactPage contactPage = allMenu.openContactPage();
         Assert.assertTrue(contactPage.isPageOpened(), "Contact page is not opened");
     }
+
+    @Test(description = "JIRA#AUTO-0011")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyPhoneFinderTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPhoneFinderBlockPresent(), "Phone Finder block is not opened");
+        PhoneFinderPage phoneFinderPage =
+
+    }
 }

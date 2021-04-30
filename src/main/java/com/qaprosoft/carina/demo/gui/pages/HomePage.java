@@ -45,6 +45,9 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
 
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']")
+    private ExtendedWebElement phoneFinderBlock;
+
     public HomePage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(newsColumn);
@@ -57,6 +60,10 @@ public class HomePage extends AbstractPage {
 
     public HeaderMenu getHeaderMenu() {
         return header;
+    }
+
+    public boolean isPhoneFinderBlockPresent() {
+        return phoneFinderBlock.isPresent();
     }
 
     public BrandModelsPage selectBrand(String brand) {
