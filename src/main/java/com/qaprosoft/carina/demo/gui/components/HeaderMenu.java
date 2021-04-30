@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HeaderMenu extends AbstractUIObject {
 
-    @FindBy(css = ".lines-button.minus.focused")
+    @FindBy(css = ".lines-button.minus")
     private ExtendedWebElement burgerMenu;
 
     @FindBy(id = "logo")
@@ -50,6 +50,11 @@ public class HeaderMenu extends AbstractUIObject {
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
+    }
+
+    public AllMenu clickBurgerMenu() {
+        burgerMenu.click();
+        return new AllMenu(driver);
     }
 
     public boolean isBurgerMenuPresent() {

@@ -1,7 +1,9 @@
 package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
+import com.qaprosoft.carina.demo.gui.components.AllMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
 import com.qaprosoft.carina.demo.gui.pages.*;
@@ -10,7 +12,6 @@ import com.qaprosoft.carina.demo.gui.service.UserCreator;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -95,8 +96,8 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(articlePage.getArticleTitle(), titleNews, "Articles are not the same");
     }
 
-    @Test(description = "JIRA#DEMO-0007")
-    @Parameters({"searchKey"})
+    @Test(dataProvider = "DataProvider")
+    @XlsDataSourceParameters(path = "xls/mobile.xlsx", sheet = "GSMArena", dsUid = "TUID", dsArgs = "brand")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySearchingProcessTest(String searchQ) {
         LoginService loginService = new LoginService();
@@ -132,5 +133,34 @@ public class GsmArenaTest extends AbstractTest {
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
         Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTextByAlphabet());
+    }
+
+    @Test(description = "JIRA#AUTO-0010")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyBurgerMenuInHeader() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        AllMenu allMenu = homePage.getHeaderMenu().clickBurgerMenu();
+        Assert.assertTrue(allMenu.isAllMenuOpened(), "All menu is not opened");
+        homePage = allMenu.openHomePage();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        NewsPage newsPage = allMenu.openNewsPage();
+        Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened");
+        ReviewsPage reviewsPage = allMenu.openReviewsPage();
+        Assert.assertTrue(reviewsPage.isPageOpened(), "Reviews page is not opened");
+        VideosPage videosPage = allMenu.openVideosPage();
+        Assert.assertTrue(videosPage.isPageOpened(), "Videos page is not opened");
+        FeaturedPage featuredPage = allMenu.openFeaturedPage();
+        Assert.assertTrue(featuredPage.isPageOpened(), "Featured page is not opened");
+        PhoneFinderPage phoneFinderPage = allMenu.openPhoneFinderPage();
+        Assert.assertTrue(phoneFinderPage.isPageOpened(), "Phone finder page is not opened");
+        DealsPage dealsPage = allMenu.openDealsPage();
+        Assert.assertTrue(dealsPage.isPageOpened(), "Deals page is not opened");
+        ToolsPage toolsPage = allMenu.openToolsPage();
+        Assert.assertTrue(toolsPage.isPageOpened(), "Tools page is not opened");
+        CoveragePage coveragePage = allMenu.openCoveragePage();
+        Assert.assertTrue(coveragePage.isPageOpened(), "Coverage page is not opened");
+        ContactPage contactPage = allMenu.openContactPage();
+        Assert.assertTrue(contactPage.isPageOpened(), "Contact page is not opened");
     }
 }
