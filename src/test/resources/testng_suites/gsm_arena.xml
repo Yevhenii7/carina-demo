@@ -45,6 +45,7 @@
                     <include name="verifyArticleNameTest"/>
                     <include name="verifyGlossaryParagraphTest"/>
                     <include name="verifyGlossaryParagraphTextByAlphabetTest"/>
+                    <include name="verifyPhoneFinderTest"/>
                 </methods>
             </class>
         </classes>
