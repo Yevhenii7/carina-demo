@@ -5,6 +5,7 @@ import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSour
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
+import com.qaprosoft.carina.demo.gui.components.ModelItem;
 import com.qaprosoft.carina.demo.gui.components.NewsItem;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
@@ -140,27 +141,60 @@ public class GsmArenaTest extends AbstractTest {
     public void verifyBurgerMenuInHeader() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        BurgerMenu allMenu = homePage.getHeaderMenu().clickBurgerMenu();
-        Assert.assertTrue(allMenu.isBurgerMenuVisible(), "All menu is not opened");
-        homePage = allMenu.openHomePage();
+        BurgerMenu burgerMenu = homePage.getHeaderMenu().clickBurgerMenu();
+        Assert.assertTrue(burgerMenu.isBurgerMenuVisible(), "Burger menu is not visible");
+        homePage = burgerMenu.openHomePage();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        NewsPage newsPage = allMenu.openNewsPage();
+        NewsPage newsPage = burgerMenu.openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened");
-        ReviewsPage reviewsPage = allMenu.openReviewsPage();
+        ReviewsPage reviewsPage = burgerMenu.openReviewsPage();
         Assert.assertTrue(reviewsPage.isPageOpened(), "Reviews page is not opened");
-        VideosPage videosPage = allMenu.openVideosPage();
+        VideosPage videosPage = burgerMenu.openVideosPage();
         Assert.assertTrue(videosPage.isPageOpened(), "Videos page is not opened");
-        FeaturedPage featuredPage = allMenu.openFeaturedPage();
+        FeaturedPage featuredPage = burgerMenu.openFeaturedPage();
         Assert.assertTrue(featuredPage.isPageOpened(), "Featured page is not opened");
-        PhoneFinderPage phoneFinderPage = allMenu.openPhoneFinderPage();
+        PhoneFinderPage phoneFinderPage = burgerMenu.openPhoneFinderPage();
         Assert.assertTrue(phoneFinderPage.isPageOpened(), "Phone finder page is not opened");
-        DealsPage dealsPage = allMenu.openDealsPage();
+        DealsPage dealsPage = burgerMenu.openDealsPage();
         Assert.assertTrue(dealsPage.isPageOpened(), "Deals page is not opened");
-        ToolsPage toolsPage = allMenu.openToolsPage();
+        ToolsPage toolsPage = burgerMenu.openToolsPage();
         Assert.assertTrue(toolsPage.isPageOpened(), "Tools page is not opened");
-        CoveragePage coveragePage = allMenu.openCoveragePage();
+        CoveragePage coveragePage = burgerMenu.openCoveragePage();
         Assert.assertTrue(coveragePage.isPageOpened(), "Coverage page is not opened");
-        ContactPage contactPage = allMenu.openContactPage();
+        ContactPage contactPage = burgerMenu.openContactPage();
         Assert.assertTrue(contactPage.isPageOpened(), "Contact page is not opened");
+    }
+
+    @Test(description = "JIRA#AUTO-0011")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyPhoneFinderTest() {
+        final String textResult = "results";
+        final String modelBrand = "xiaomi";
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPhoneFinderBlockPresent(), "Phone finder block is not present");
+        PhoneFinderPage phoneFinderPage = homePage.getPhoneFinderMenu().openPhoneFinderPage();
+        Assert.assertTrue(phoneFinderPage.isPageOpened(), "Phone finder page is not opened");
+        Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article phone finder is not present");
+        phoneFinderPage.clickDropDownButton();
+        phoneFinderPage.inputModelBrand(modelBrand);
+        Assert.assertTrue(phoneFinderPage.isShowBtnPresent(), "Show button is not present");
+        String textFromShowBtn = phoneFinderPage.readResultTextFromBtnShow();
+        Assert.assertTrue(textFromShowBtn.contains(textResult), "Text from show btn is not contains results");
+        PhoneFinderResultPage resultPage = phoneFinderPage.clickShowButton();
+        Assert.assertTrue(resultPage.isPageOpened(), "Phone finder result page is not opened");
+        String textSearchResult = resultPage.readSearchResult();
+        Assert.assertTrue(textSearchResult.contains(textFromShowBtn), "Search result does not contains text from 'Show' button");
+        Assert.assertTrue(resultPage.isClickHereLinkPresent(), "'Click here' link is not present");
+        List<ModelItem> listModels = resultPage.readModelItemList();
+        Assert.assertFalse(listModels.isEmpty(), "List of models is empty");
+
+        for (ModelItem item : listModels) {
+            Assert.assertTrue(item.readModel().toLowerCase().contains(modelBrand.toLowerCase()), "List of models does not contains " + modelBrand);
+        }
+
+        Assert.assertTrue(resultPage.isHereLinkPresent(), "'Here' link is not present");
+        resultPage.clickLinkClickHere();
+        Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article 'Phone Finder' is not present");
     }
 }
