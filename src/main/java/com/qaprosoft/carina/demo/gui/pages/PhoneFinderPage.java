@@ -15,7 +15,6 @@ public class PhoneFinderPage extends AbstractPage {
     private ExtendedWebElement articlePhoneFinder;
 
     @FindBy(xpath = "//button[@data-id='sMakers']")
-
     private ExtendedWebElement dropUpMenu;
 
     @FindBy(xpath = "(//input[@class='form-control'])[1]")

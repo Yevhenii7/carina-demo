@@ -180,10 +180,10 @@ public class GsmArenaTest extends AbstractTest {
         phoneFinderPage.inputModelBrand(modelBrand);
         Assert.assertTrue(phoneFinderPage.isShowBtnPresent(), "Show button is not present");
         String textFromShowBtn = phoneFinderPage.readResultTextFromBtnShow();
-        Assert.assertTrue(phoneFinderPage.readResultTextFromBtnShow().contains(textResult), "Text from show btn is not contains results");
+        Assert.assertTrue(textFromShowBtn.contains(textResult), "Text from show btn is not contains results");
         PhoneFinderResultPage resultPage = phoneFinderPage.clickShowButton();
-        String textSearchResult = resultPage.readSearchResult();
         Assert.assertTrue(resultPage.isPageOpened(), "Phone finder result page is not opened");
+        String textSearchResult = resultPage.readSearchResult();
         Assert.assertTrue(textSearchResult.contains(textFromShowBtn), "Search result does not contains text from 'Show' button");
         Assert.assertTrue(resultPage.isClickHereLinkPresent(), "'Click here' link is not present");
         List<ModelItem> listModels = resultPage.readModelItemList();
@@ -192,9 +192,9 @@ public class GsmArenaTest extends AbstractTest {
         for (ModelItem item : listModels) {
             Assert.assertTrue(item.readModel().toLowerCase().contains(modelBrand.toLowerCase()), "List of models does not contains " + modelBrand);
         }
+
         Assert.assertTrue(resultPage.isHereLinkPresent(), "'Here' link is not present");
         resultPage.clickLinkClickHere();
-        Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(),"Article 'Phone Finder' is not present");
-
+        Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article 'Phone Finder' is not present");
     }
 }
