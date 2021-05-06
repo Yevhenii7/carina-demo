@@ -39,6 +39,9 @@ public class BrandModelsPage extends AbstractPage {
     @FindBy(xpath = "//li[@class='article-info-meta-link help help-sort-popularity']")
     private ExtendedWebElement linkPopularity;
 
+    @FindBy(xpath = "//div[@class='makers']/ul/li/a[1]")
+    private ExtendedWebElement linkFirstPhone;
+
     public BrandModelsPage(WebDriver driver) {
         super(driver);
     }
@@ -60,5 +63,10 @@ public class BrandModelsPage extends AbstractPage {
     public void clickPopularityTab() {
         linkPopularity.click();
         LOGGER.info("Popularity tab pressed");
+    }
+
+    public ModelInfoPage clickFirstPhone() {
+        linkFirstPhone.click();
+        return new ModelInfoPage(getDriver());
     }
 }

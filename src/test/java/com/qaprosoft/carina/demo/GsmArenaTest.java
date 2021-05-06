@@ -16,7 +16,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.text.ParseException;
 import java.util.List;
 
 import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
@@ -202,20 +201,25 @@ public class GsmArenaTest extends AbstractTest {
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyOpinionsOnPhonePageTest() {
         final String brandName = "Apple";
-        final String modelName = "iPhone 12 Pro Max";
         LoginService loginService = new LoginService();
         UserCreator userCreator = new UserCreator();
         HomePage homePage = loginService.login(userCreator);
         BrandModelsPage productsPage = homePage.selectBrand(brandName);
         Assert.assertTrue(productsPage.isPageWithBrandPhonesOpened(brandName), "Brand phones page is not opened");
         productsPage.clickPopularityTab();
-        ModelInfoPage productInfoPage = productsPage.selectModel(modelName);
+        ModelInfoPage productInfoPage = productsPage.clickFirstPhone();
         Assert.assertTrue(productInfoPage.isPageWithPhoneOpened(), "Page with phone is not opened");
         OpinionPage opinionPage = productInfoPage.openOpinionsTab();
-        Assert.assertTrue(opinionPage.sortByNewestFirst(), "Newest first are not sorted");
+        Assert.assertTrue(opinionPage.isOpinionsSortedByNewestFirst(), "Newest first are not sorted");
         opinionPage.clickSortByBestRating();
-        Assert.assertTrue(opinionPage.sortByBestRating(), "Best rating not sorted");
-        Assert.assertTrue(opinionPage.isCommentRated(), "Comment is not rated");
-        Assert.assertTrue(opinionPage.isCommentUnrated(), "Comment is not unrated");
+        Assert.assertTrue(opinionPage.IsOpinionsSortedByBestRating(), "Best rating not sorted");
+        int ratingBefore = opinionPage.getNumberBeforeRating();
+        opinionPage.clickCommentVoteUp();
+        int ratingAfter = opinionPage.getNumberAfterRating();
+        Assert.assertTrue(ratingBefore < ratingAfter, "Comment is not rated");
+        int unRatingAfter = opinionPage.getNumberAfterUnRating();
+        opinionPage.clickCommentVoteDown();
+        int unRatingBefore = opinionPage.getNumberBeforeUnRating();
+        Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
     }
 }

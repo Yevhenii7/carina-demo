@@ -2,6 +2,7 @@ package com.qaprosoft.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import groovy.util.logging.Log;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -26,17 +27,20 @@ public class OpinionPage extends AbstractPage {
     @FindBy(xpath = "//span[@class='thumbs-score']")
     private List<ExtendedWebElement> ratingScore;
 
-    @FindBy(xpath = "//a[@class='voting-link vote-up']")
-    private List<ExtendedWebElement> commentVoteUp;
+    @FindBy(xpath = "(//span[@class='thumbs-score'])[1]")
+    private ExtendedWebElement scoreRating;
 
-    @FindBy(xpath = "//a[@class='voting-link vote-down']")
-    private List<ExtendedWebElement> commentVoteDown;
+    @FindBy(xpath = "(//a[@class='voting-link vote-up'])[1]")
+    private ExtendedWebElement commentVoteUp;
+
+    @FindBy(xpath = "(//a[@class='voting-link vote-down'])[1]")
+    private ExtendedWebElement commentVoteDown;
 
     public OpinionPage(WebDriver driver) {
         super(driver);
     }
 
-    public boolean sortByNewestFirst() {
+    public boolean isOpinionsSortedByNewestFirst() {
         List<Date> dateList = new ArrayList<>();
         for (ExtendedWebElement element : dates) {
             String date = element.getText();
@@ -64,7 +68,7 @@ public class OpinionPage extends AbstractPage {
         LOGGER.info("Title 'best rating' selected");
     }
 
-    public boolean sortByBestRating() {
+    public boolean IsOpinionsSortedByBestRating() {
         List<Integer> ratings = new ArrayList<>();
         for (ExtendedWebElement element : ratingScore) {
             String ratingNumbers = element.getText();
@@ -82,53 +86,37 @@ public class OpinionPage extends AbstractPage {
         return true;
     }
 
-    public boolean isCommentRated() {
-        List<String> listBeforeRatings = new ArrayList<>();
-        List<String> listAfterRatings = new ArrayList<>();
-        for (ExtendedWebElement element : ratingScore) {
-            String ratingBefore = element.getText();
-            listBeforeRatings.add(ratingBefore);
-        }
-        int beforeRating = Integer.parseInt(listBeforeRatings.get(0));
-        for (int i = 0; i < commentVoteUp.size(); i++) {
-            commentVoteUp.get(0).click();
-        }
-        for (ExtendedWebElement element : ratingScore) {
-            String ratingAfter = element.getText();
-            listAfterRatings.add(ratingAfter);
-        }
-        int afterRating = Integer.parseInt(listAfterRatings.get(0));
-        if (beforeRating < afterRating) {
-            LOGGER.info("Comment is rated : [" + beforeRating + "]" + " before rating " + "[" + afterRating + "]" + " after rating");
-        } else if (beforeRating > afterRating) {
-            LOGGER.error("Comment is not rated: [" + beforeRating + "]" + " before rating " + "[" + afterRating + "]" + " after rating");
-            return false;
-        }
-        return true;
+    public void clickCommentVoteUp() {
+        commentVoteUp.click();
+        LOGGER.info("Comment vote up clicked");
     }
 
-    public boolean isCommentUnrated() {
-        List<String> listBeforeRatings = new ArrayList<>();
-        List<String> listAfterRatings = new ArrayList<>();
-        for (ExtendedWebElement element : ratingScore) {
-            String ratingBefore = element.getText();
-            listBeforeRatings.add(ratingBefore);
-        }
-        int beforeRating = Integer.parseInt(listBeforeRatings.get(0));
-        for (int i = 0; i < commentVoteDown.size(); i++) {
-            commentVoteDown.get(0).click();
-        }
-        for (ExtendedWebElement element : ratingScore) {
-            String ratingAfter = element.getText();
-            listAfterRatings.add(ratingAfter);
-        }
-        int afterRating = Integer.parseInt(listAfterRatings.get(0));
-        if (beforeRating > afterRating) {
-            LOGGER.info("Comment is unrated : [" + beforeRating + "]" + " before rating " + "[" + afterRating + "]" + " after rating");
-        } else if (beforeRating < afterRating) {
-            LOGGER.error("Comment is not unrated: [" + beforeRating + "]" + " before rating " + "[" + afterRating + "]" + " after rating");
-            return false;
-        }
-        return true;
+    public void clickCommentVoteDown() {
+        commentVoteDown.click();
+        LOGGER.info("Comment vote down clicked");
+    }
+
+    public int getNumberBeforeRating() {
+        String ratingBefore = scoreRating.getText();
+        LOGGER.info("Rating before " + ratingBefore);
+        return Integer.parseInt(ratingBefore);
+    }
+
+    public int getNumberAfterRating() {
+        String ratingAfter = scoreRating.getText();
+        LOGGER.info("Rating after " + ratingAfter);
+        return Integer.parseInt(ratingAfter);
+    }
+
+    public int getNumberBeforeUnRating() {
+        String ratingBefore = scoreRating.getText();
+        LOGGER.info("Rating before " + ratingBefore);
+        return Integer.parseInt(ratingBefore);
+    }
+
+    public int getNumberAfterUnRating() {
+        String ratingAfter = scoreRating.getText();
+        LOGGER.info("Rating after " + ratingAfter);
+        return Integer.parseInt(ratingAfter);
     }
 }
