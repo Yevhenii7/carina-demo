@@ -15,6 +15,9 @@ public class PhoneFinderMenu extends AbstractUIObject {
     @FindBy(xpath = "//p[@class='pad'][1]")
     private ExtendedWebElement phoneFinderLink;
 
+    @FindBy(xpath = "//a[@href='apple-phones-48.php']")
+    private ExtendedWebElement linkApplePhones;
+
     public PhoneFinderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
