@@ -16,6 +16,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.text.ParseException;
 import java.util.List;
 
 import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
@@ -133,7 +134,7 @@ public class GsmArenaTest extends AbstractTest {
         homePage.open();
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isPageOpened(), "Glossary page is not opened");
-        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTextByAlphabet());
+        Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTextByAlphabet(), "Glossary paragraph by alphabet");
     }
 
     @Test(description = "JIRA#AUTO-0010")
@@ -192,9 +193,29 @@ public class GsmArenaTest extends AbstractTest {
         for (ModelItem item : listModels) {
             Assert.assertTrue(item.readModel().toLowerCase().contains(modelBrand.toLowerCase()), "List of models does not contains " + modelBrand);
         }
-
         Assert.assertTrue(resultPage.isHereLinkPresent(), "'Here' link is not present");
         resultPage.clickLinkClickHere();
         Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article 'Phone Finder' is not present");
+    }
+
+    @Test(description = "JIRA#AUTO-0011")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyOpinionsOnPhonePageTest() {
+        final String brandName = "Apple";
+        final String modelName = "iPhone 12 Pro Max";
+        LoginService loginService = new LoginService();
+        UserCreator userCreator = new UserCreator();
+        HomePage homePage = loginService.login(userCreator);
+        BrandModelsPage productsPage = homePage.selectBrand(brandName);
+        Assert.assertTrue(productsPage.isPageWithBrandPhonesOpened(brandName), "Brand phones page is not opened");
+        productsPage.clickPopularityTab();
+        ModelInfoPage productInfoPage = productsPage.selectModel(modelName);
+        Assert.assertTrue(productInfoPage.isPageWithPhoneOpened(), "Page with phone is not opened");
+        OpinionPage opinionPage = productInfoPage.openOpinionsTab();
+        Assert.assertTrue(opinionPage.sortByNewestFirst(), "Newest first are not sorted");
+        opinionPage.clickSortByBestRating();
+        Assert.assertTrue(opinionPage.sortByBestRating(), "Best rating not sorted");
+        Assert.assertTrue(opinionPage.isCommentRated(), "Comment is not rated");
+        Assert.assertTrue(opinionPage.isCommentUnrated(), "Comment is not unrated");
     }
 }

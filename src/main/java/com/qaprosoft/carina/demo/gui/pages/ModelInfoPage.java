@@ -15,13 +15,19 @@
  */
 package com.qaprosoft.carina.demo.gui.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
+import java.util.List;
+
 public class ModelInfoPage extends AbstractPage {
+
+    private static final Logger LOGGER = Logger.getLogger(ModelInfoPage.class);
+
     @FindBy(css = ".help-display strong")
     private ExtendedWebElement displayInfoLabel;
 
@@ -33,6 +39,12 @@ public class ModelInfoPage extends AbstractPage {
 
     @FindBy(css = ".help-battery strong")
     private ExtendedWebElement batteryInfoLabel;
+
+    @FindBy(xpath = "//h1[@class='specs-phone-name-title']")
+    private ExtendedWebElement titlePhoneName;
+
+    @FindBy(xpath = "(//li[@class='article-info-meta-link light'])[4]")
+    private ExtendedWebElement articleOpinionsTab;
 
     public ModelInfoPage(WebDriver driver) {
         super(driver);
@@ -56,5 +68,14 @@ public class ModelInfoPage extends AbstractPage {
     public String readBattery() {
         assertElementPresent(displayInfoLabel);
         return batteryInfoLabel.getText();
+    }
+
+    public boolean isPageWithPhoneOpened() {
+        return titlePhoneName.isPresent();
+    }
+
+    public OpinionPage openOpinionsTab() {
+        articleOpinionsTab.click();
+        return new OpinionPage(getDriver());
     }
 }

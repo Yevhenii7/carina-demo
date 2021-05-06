@@ -24,6 +24,7 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.ModelInfoPage;
 
 public class ModelItem extends AbstractUIObject {
+
     @FindBy(xpath = ".//strong/span")
     private ExtendedWebElement modelLabel;
 
