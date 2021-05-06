@@ -96,27 +96,15 @@ public class OpinionPage extends AbstractPage {
         LOGGER.info("Comment vote down clicked");
     }
 
-    public int getNumberBeforeRating() {
-        String ratingBefore = scoreRating.getText();
-        LOGGER.info("Rating before " + ratingBefore);
-        return Integer.parseInt(ratingBefore);
+    public int getNumberRating() {
+        String ratingNumber = scoreRating.getText();
+        LOGGER.info("Rating before " + ratingNumber);
+        return Integer.parseInt(ratingNumber);
     }
 
-    public int getNumberAfterRating() {
-        String ratingAfter = scoreRating.getText();
-        LOGGER.info("Rating after " + ratingAfter);
-        return Integer.parseInt(ratingAfter);
-    }
-
-    public int getNumberBeforeUnRating() {
-        String ratingBefore = scoreRating.getText();
-        LOGGER.info("Rating before " + ratingBefore);
-        return Integer.parseInt(ratingBefore);
-    }
-
-    public int getNumberAfterUnRating() {
-        String ratingAfter = scoreRating.getText();
-        LOGGER.info("Rating after " + ratingAfter);
-        return Integer.parseInt(ratingAfter);
+    public int getNumberUnRating() {
+        String unRatingNumber = scoreRating.getText();
+        LOGGER.info("Rating before " + unRatingNumber);
+        return Integer.parseInt(unRatingNumber);
     }
 }

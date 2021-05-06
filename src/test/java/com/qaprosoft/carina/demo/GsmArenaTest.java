@@ -213,13 +213,13 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(opinionPage.isOpinionsSortedByNewestFirst(), "Newest first are not sorted");
         opinionPage.clickSortByBestRating();
         Assert.assertTrue(opinionPage.IsOpinionsSortedByBestRating(), "Best rating not sorted");
-        int ratingBefore = opinionPage.getNumberBeforeRating();
+        int ratingBefore = opinionPage.getNumberRating();
         opinionPage.clickCommentVoteUp();
-        int ratingAfter = opinionPage.getNumberAfterRating();
+        int ratingAfter = opinionPage.getNumberRating();
         Assert.assertTrue(ratingBefore < ratingAfter, "Comment is not rated");
-        int unRatingAfter = opinionPage.getNumberAfterUnRating();
+        int unRatingAfter = opinionPage.getNumberUnRating();
         opinionPage.clickCommentVoteDown();
-        int unRatingBefore = opinionPage.getNumberBeforeUnRating();
+        int unRatingBefore = opinionPage.getNumberUnRating();
         Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
     }
 }
