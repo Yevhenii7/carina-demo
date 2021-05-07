@@ -49,7 +49,7 @@ public class CarinaDescriptionPage extends CarinaDescriptionPageBase {
         return initPage(getDriver(), WebViewPageBase.class);
     }
 
-    @Override
+
     public ChartsPageBase navigateToChartsPage() {
         leftMenuButton.click();
         chartsLink.click();
