@@ -3,11 +3,11 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.common;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public abstract class HomePageBase extends AbstractPage {
+public abstract class SkipPageBase extends AbstractPage {
 
-    public HomePageBase(WebDriver driver) {
+    public SkipPageBase(WebDriver driver) {
         super(driver);
     }
 
-//    public abstract NoteDescriptionPageBase clickNoteBtn();
+    public abstract NoteDescriptionPageBase clickNoteBtn();
 }
