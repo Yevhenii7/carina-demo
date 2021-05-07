@@ -1,6 +1,7 @@
 package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
@@ -16,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
@@ -165,11 +167,11 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(contactPage.isPageOpened(), "Contact page is not opened");
     }
 
-    @Test(description = "JIRA#AUTO-0011")
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
     @MethodOwner(owner = "Kolchyba Yevhenii")
-    public void verifyPhoneFinderTest() {
+    @CsvDataSourceParameters(path = "csv/search_model_brand.csv", dsUid = "TUID")
+    public void verifyPhoneFinderTest(HashMap<String, String> searchModelBrand) {
         final String textResult = "results";
-        final String modelBrand = "xiaomi";
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPhoneFinderBlockPresent(), "Phone finder block is not present");
@@ -177,7 +179,8 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(phoneFinderPage.isPageOpened(), "Phone finder page is not opened");
         Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article phone finder is not present");
         phoneFinderPage.clickDropDownButton();
-        phoneFinderPage.inputModelBrand(modelBrand);
+        String searchBrand = searchModelBrand.get("brandName");
+        phoneFinderPage.inputModelBrand(searchBrand);
         Assert.assertTrue(phoneFinderPage.isShowBtnPresent(), "Show button is not present");
         String textFromShowBtn = phoneFinderPage.readResultTextFromBtnShow();
         Assert.assertTrue(textFromShowBtn.contains(textResult), "Text from show btn is not contains results");
@@ -190,29 +193,30 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertFalse(listModels.isEmpty(), "List of models is empty");
 
         for (ModelItem item : listModels) {
-            Assert.assertTrue(item.readModel().toLowerCase().contains(modelBrand.toLowerCase()), "List of models does not contains " + modelBrand);
+            Assert.assertTrue(item.readModel().toLowerCase().contains(searchBrand.toLowerCase()), "List of models does not contains " + searchBrand);
         }
         Assert.assertTrue(resultPage.isHereLinkPresent(), "'Here' link is not present");
         resultPage.clickLinkClickHere();
         Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article 'Phone Finder' is not present");
     }
 
-    @Test(description = "JIRA#AUTO-0011")
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
     @MethodOwner(owner = "Kolchyba Yevhenii")
-    public void verifyOpinionsOnPhonePageTest() {
-        final String brandName = "Apple";
+    @CsvDataSourceParameters(path = "csv/search_key_information", dsUid = "TUID")
+    public void verifyOpinionsOnPhonePageTest(HashMap<String, String> searchInfo) {
         LoginService loginService = new LoginService();
         UserCreator userCreator = new UserCreator();
         HomePage homePage = loginService.login(userCreator);
-        BrandModelsPage productsPage = homePage.selectBrand(brandName);
-        Assert.assertTrue(productsPage.isPageWithBrandPhonesOpened(brandName), "Brand phones page is not opened");
+        String search = searchInfo.get("brand");
+        BrandModelsPage productsPage = homePage.selectBrand(search);
+        Assert.assertTrue(productsPage.isPageWithBrandPhonesOpened(search), "Brand phones page is not opened");
         productsPage.clickPopularityTab();
         ModelInfoPage productInfoPage = productsPage.clickFirstPhone();
         Assert.assertTrue(productInfoPage.isPageWithPhoneOpened(), "Page with phone is not opened");
         OpinionPage opinionPage = productInfoPage.openOpinionsTab();
         Assert.assertTrue(opinionPage.isOpinionsSortedByNewestFirst(), "Newest first are not sorted");
         opinionPage.clickSortByBestRating();
-        Assert.assertTrue(opinionPage.IsOpinionsSortedByBestRating(), "Best rating not sorted");
+        Assert.assertTrue(opinionPage.isOpinionsSortedByBestRating(), "Best rating not sorted");
         int ratingBefore = opinionPage.getNumberRating();
         opinionPage.clickCommentVoteUp();
         int ratingAfter = opinionPage.getNumberRating();
