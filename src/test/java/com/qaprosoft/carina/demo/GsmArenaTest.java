@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo;
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
+import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
@@ -56,7 +57,7 @@ public class GsmArenaTest extends AbstractTest {
         LoginForm loginForm = homePage.getHeaderMenu().openLoginForm();
         Assert.assertTrue(loginForm.isLoginFormPresent(), "Login form is not present");
         loginForm.login(userCreator);
-        Assert.assertTrue(homePage.getHeaderMenu().isIconLogOutPresent(), "Icon LogOut is not present");
+        Assert.assertEquals(homePage.getHeaderMenu().getUserNickname(), R.TESTDATA.get("nickname"), "Icon LogOut is not present");
     }
 
     @Test(description = "JIRA#AUTO-0003")

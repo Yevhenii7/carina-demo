@@ -4,9 +4,11 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.LoginForm;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HeaderMenu extends AbstractUIObject {
 
@@ -48,8 +50,8 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(css = ".head-icon.icon-login")
     private ExtendedWebElement iconLogin;
 
-    @FindBy(xpath = "//a[@class='signup-icon no-margin-right']")
-    private ExtendedWebElement logOutIcon;
+    @FindBy(xpath = "//a[@id='login-active']/span[@class='icon-count'][text()='test.user']")
+    private ExtendedWebElement userName;
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -110,12 +112,10 @@ public class HeaderMenu extends AbstractUIObject {
         return new LoginForm(driver);
     }
 
-    public boolean isIconLogOutPresent() {
-        return logOutIcon.isElementPresent();
+    public String getUserNickname() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(userName.getBy()), 10);
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        LOGGER.info(js.executeScript("return document.querySelectorAll('.icon-count',':before')[6].textContent"));
+        return (String) js.executeScript("return document.querySelectorAll('.icon-count',':before')[6].textContent");
     }
-
-//    public String getUserNickname() {
-//        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//        return (String) js.executeScript("document.querySelectorAll('.icon-count',':before')[6].textContent");
-//    }
 }
