@@ -1,11 +1,4 @@
-package com.qaprosoft.carina.demo.mobile.gui.pages.common;
+package com.qaprosoft.carina.demo.mobile.gui.pages.android;
+public class NoteDescriptionPage {
 
-import com.qaprosoft.carina.core.gui.AbstractPage;
-import org.openqa.selenium.WebDriver;
-
-public class NoteDescriptionPage extends AbstractPage {
-
-    public NoteDescriptionPage(WebDriver driver) {
-        super(driver);
-    }
 }

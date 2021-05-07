@@ -9,5 +9,5 @@ public abstract class HomePageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract NoteDescriptionPageBase clickNoteBtn();
+//    public abstract NoteDescriptionPageBase clickNoteBtn();
 }
