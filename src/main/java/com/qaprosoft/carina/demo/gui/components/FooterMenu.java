@@ -15,16 +15,13 @@
  */
 package com.qaprosoft.carina.demo.gui.components;
 
-import com.qaprosoft.carina.demo.gui.pages.GlossaryPage;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 
 public class FooterMenu extends AbstractUIObject {
 

@@ -18,9 +18,9 @@ package com.qaprosoft.carina.demo.gui.pages;
 import java.util.List;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.demo.gui.components.PhoneFinderMenu;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
@@ -37,7 +37,10 @@ public class BrandModelsPage extends AbstractPage {
     private ExtendedWebElement titleBrandName;
 
     @FindBy(xpath = "//li[@class='article-info-meta-link help help-sort-popularity']")
-    private ExtendedWebElement linkPopularity;
+    private ExtendedWebElement tabPopularity;
+
+    @FindBy(css = ".article-info-meta-link.light.large.help.help-review")
+    private ExtendedWebElement tabCompare;
 
     @FindBy(xpath = "//div[@class='makers']/ul/li/a[1]")
     private ExtendedWebElement linkFirstPhone;
@@ -56,17 +59,29 @@ public class BrandModelsPage extends AbstractPage {
     }
 
     public boolean isPageWithBrandPhonesOpened(String brand) {
-        LOGGER.info("Title from brand phones page " + titleBrandName.getText());
+        LOGGER.info("selecting '" + brand + "' brand...");
         return titleBrandName.isElementWithTextPresent(brand + " phones");
     }
 
     public void clickPopularityTab() {
-        linkPopularity.click();
+        tabPopularity.click();
         LOGGER.info("Popularity tab pressed");
     }
 
     public ModelInfoPage clickFirstPhone() {
         linkFirstPhone.click();
         return new ModelInfoPage(getDriver());
+    }
+
+    public void clickCompareTab() {
+        tabCompare.click();
+        LOGGER.info("Compare tab pressed");
+    }
+
+    public void selectModels(String... elements) {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (String element : elements) {
+            js.executeScript("document.querySelectorAll('.makers.compare-mode ul li')[" + element + "].className = 'checked'");
+        }
     }
 }

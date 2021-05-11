@@ -5,10 +5,8 @@ import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSour
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
-import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
-import com.qaprosoft.carina.demo.gui.components.ModelItem;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.*;
+import com.qaprosoft.carina.demo.gui.model.User;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
@@ -227,4 +225,47 @@ public class GsmArenaTest extends AbstractTest {
         int unRatingBefore = opinionPage.getNumberUnRating();
         Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
     }
+
+    @Test(description = "JIRA#AUTO-0007")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void findSpecificDevicesTest() {
+        final String brand = "Apple";
+        LoginService loginService = new LoginService();
+        UserCreator userCreator = new UserCreator();
+        HomePage homePage = loginService.login(userCreator);
+        BrandModelsPage brandModelsPage = homePage.selectBrand(brand);
+        Assert.assertTrue(brandModelsPage.isPageWithBrandPhonesOpened(brand), "Brand phones page is not opened");
+        brandModelsPage.clickCompareTab();
+        brandModelsPage.selectModels("0", "1", "2");
+        brandModelsPage.clickCompareTab();
+//        Assert.assertTrue(comparePage.isPageOpened(), "Compare model page is not opened");
+    }
+
+    @Test(description = "JIRA#AUTO-0007")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyRumorMillPageTest() {
+//       1. open site and login
+        LoginService loginService = new LoginService();
+        UserCreator userCreator = new UserCreator();
+        HomePage homePage = loginService.login(userCreator);
+        // 2 click RumorMill link on phone finder box -> page RumorMill is opened
+        RumorMillPage rumorMillPage = homePage.getPhoneFinderMenu().openRumorMillPage();
+        Assert.assertTrue(rumorMillPage.isPageOpened(), "Rumor page is not opened");
+        //3 sort by 'TOP 10' device -> TOP 10 devices is sorted
+        Assert.assertTrue(rumorMillPage.isTop10DevicesSorted(), "Rumor mill page is not sorted");
+    }
+
+    @Test(description = "JIRA#AUTO-0007")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    public void verifyAllMobileBrandsByAlphabetTest() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        AllBrandPage allBrandPage = homePage.getPhoneFinderMenu().openAllBrandPage();
+        Assert.assertTrue(allBrandPage.isPageOpened(), "All brand page is not opened");
+        Assert.assertTrue(allBrandPage.isAllMobileBrandsByAlphabet(),"All brands are not by alphabet");
+
+
+    }
+
 }

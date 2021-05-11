@@ -26,6 +26,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 
 public class CompareBlock extends AbstractUIObject {
+
     @FindBy(xpath = ".//input[contains(@id, 'sSearch')]")
     private ExtendedWebElement inputField;
 
