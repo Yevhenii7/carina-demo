@@ -1,0 +1,13 @@
+{
+  "code": 200,
+  "meta": null,
+  "data": {
+    "id": 1399,
+    "name": "Kolchiba Yevheni",
+    "email": "kolchiba77.@gmail.com",
+    "gender": "Male",
+    "status": "Active",
+    "created_at": "2021-05-12T14:45:59.365+05:30",
+    "updated_at": "2021-05-12T14:45:59.365+05:30"
+  }
+}
