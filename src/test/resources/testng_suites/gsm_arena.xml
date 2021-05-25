@@ -4,7 +4,7 @@
     <test name="Searching Iphone">
         <parameter name="searchKey" value="iphone"/>
         <classes>
-            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+            <class name="com.qaprosoft.carina.demo.GsmArenaTests">
                 <methods>
                     <include name="verifySearchingProcessTest"/>
                 </methods>
@@ -15,7 +15,7 @@
     <test name="Searching Samsung">
         <parameter name="searchKey" value="samsung"/>
         <classes>
-            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+            <class name="com.qaprosoft.carina.demo.GsmArenaTests">
                 <methods>
                     <include name="verifySearchingProcessTest"/>
                 </methods>
@@ -26,7 +26,7 @@
     <test name="Searching Asus">
         <parameter name="searchKey" value="asus"/>
         <classes>
-            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+            <class name="com.qaprosoft.carina.demo.GsmArenaTests">
                 <methods>
                     <include name="verifySearchingProcessTest"/>
                 </methods>
@@ -36,7 +36,7 @@
 
     <test name="Login test">
         <classes>
-            <class name="com.qaprosoft.carina.demo.GsmArenaTest">
+            <class name="com.qaprosoft.carina.demo.GsmArenaTests">
                 <methods>
                     <include name="verifyHeaderComponents"/>
                     <include name="verifySuccessLogin"/>

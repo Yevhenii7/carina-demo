@@ -2,7 +2,6 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
-import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.*;
@@ -12,15 +11,17 @@ import com.qaprosoft.carina.demo.gui.service.UserCreator;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
+import static com.qaprosoft.carina.demo.gui.components.WebConstants.GSM_ARENA_LOGIN_FAILED_EMAIL;
+import static com.qaprosoft.carina.demo.gui.components.WebConstants.GSM_ARENA_LOGIN_FAILED_PASSWORD;
 
-public class GsmArenaTest extends AbstractTest {
+public class GsmArenaTests extends AbstractTest {
 
     @Test(description = "JIRA#AUTO-0001",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
@@ -85,9 +86,9 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(articlePage.getArticleTitle(), titleNews, "Articles are not the same");
     }
 
-    @Test(dataProvider = "DataProvider")
-    @XlsDataSourceParameters(path = "xls/mobile.xlsx", sheet = "GSMArena", dsUid = "TUID", dsArgs = "brand")
+    @Test(description = "JIRA#AUTO-000")
     @MethodOwner(owner = "Kolchyba Yevhenii")
+    @Parameters({"searchKey"})
     public void verifySearchingProcessTest(String searchQ) {
         LoginService loginService = new LoginService();
         UserCreator userCreator = new UserCreator();
