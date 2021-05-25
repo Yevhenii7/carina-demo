@@ -6,7 +6,6 @@ import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSour
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.components.*;
-import com.qaprosoft.carina.demo.gui.model.User;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
@@ -23,7 +22,7 @@ import static com.qaprosoft.carina.demo.gui.components.WebConstants.*;
 
 public class GsmArenaTest extends AbstractTest {
 
-    @Test(description = "JIRA#AUTO-0001")
+    @Test(description = "JIRA#AUTO-0001",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyHeaderComponents() {
         SoftAssert softAssert = new SoftAssert();
@@ -46,7 +45,7 @@ public class GsmArenaTest extends AbstractTest {
     }
 
 
-    @Test(description = "JIRA#AUTO-0003")
+    @Test(description = "JIRA#AUTO-0003",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidEmail() {
         UserCreator userCreator = new UserCreator();
@@ -59,7 +58,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(loginPage.loginFailed(), GSM_ARENA_LOGIN_FAILED_EMAIL, "Login is not failed");
     }
 
-    @Test(description = "JIRA#AUTO-0004")
+    @Test(description = "JIRA#AUTO-0004",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidPassword() {
         UserCreator userCreator = new UserCreator();
@@ -72,7 +71,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertEquals(loginPage.loginFailed(), GSM_ARENA_LOGIN_FAILED_PASSWORD, "Password is not wrong");
     }
 
-    @Test(description = "JIRA#AUTO-0005")
+    @Test(description = "JIRA#AUTO-0005",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyArticleNameTest() {
         LoginService loginService = new LoginService();
@@ -104,7 +103,7 @@ public class GsmArenaTest extends AbstractTest {
         }
     }
 
-    @Test(description = "JIRA#AUTO-0008")
+    @Test(description = "JIRA#AUTO-0008",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyGlossaryParagraphTest() {
         HomePage homePage = new HomePage(getDriver());
@@ -115,7 +114,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(glossaryPage.verifyGlossaryParagraphMatchesText(), "Titles are not sorted by alphabet");
     }
 
-    @Test(description = "JIRA#AUTO-0009")
+    @Test(description = "JIRA#AUTO-0009",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyGlossaryParagraphTextByAlphabetTest() {
         HomePage homePage = new HomePage(getDriver());
@@ -125,7 +124,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(glossaryPage.verifyGlossaryParagraphTextByAlphabet(), "Glossary paragraph by alphabet");
     }
 
-    @Test(description = "JIRA#AUTO-0010")
+    @Test(description = "JIRA#AUTO-0010",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyBurgerMenuInHeader() {
         HomePage homePage = new HomePage(getDriver());
@@ -154,7 +153,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(contactPage.isPageOpened(), "Contact page is not opened");
     }
 
-    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     @CsvDataSourceParameters(path = "csv/search_model_brand.csv", dsUid = "TUID")
     public void verifyPhoneFinderTest(HashMap<String, String> searchModelBrand) {
@@ -187,7 +186,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(phoneFinderPage.isArticlePhoneFinderPresent(), "Article 'Phone Finder' is not present");
     }
 
-    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     @CsvDataSourceParameters(path = "csv/search_key_information", dsUid = "TUID")
     public void verifyOpinionsOnPhonePageTest(HashMap<String, String> searchInfo) {
@@ -214,7 +213,7 @@ public class GsmArenaTest extends AbstractTest {
         Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
     }
 
-    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider",enabled = false)
     @MethodOwner(owner = "Kolchyba Yevhenii")
     @CsvDataSourceParameters(path = "csv/input_user_credential.csv", dsUid = "TUID")
     public void verifyUserLogin(HashMap<String, String> inputUserCredential) {
