@@ -1,9 +1,10 @@
 package com.qaprosoft.carina.demo.gui.service;
 
 import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.IDriverPool;
 import com.qaprosoft.carina.demo.gui.model.User;
 
-public class UserCreator {
+public class UserCreator implements IDriverPool {
 
     public User getUser() {
         User user = new User();

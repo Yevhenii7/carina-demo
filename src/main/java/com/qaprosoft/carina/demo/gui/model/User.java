@@ -7,6 +7,7 @@ public class User {
     private String password;
 
     public User() {
+
     }
 
     public String getEmail() {
@@ -28,7 +29,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

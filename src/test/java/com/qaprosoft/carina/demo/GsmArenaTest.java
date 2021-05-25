@@ -1,15 +1,12 @@
 package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoConsole;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
-import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
-import com.qaprosoft.carina.demo.gui.components.ModelItem;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.*;
+import com.qaprosoft.carina.demo.gui.model.User;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
 import com.qaprosoft.carina.demo.gui.service.UserCreator;
@@ -48,18 +45,6 @@ public class GsmArenaTest extends AbstractTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "JIRA#AUTO-0002")
-    @MethodOwner(owner = "Kolchyba Yevhenii")
-    public void verifySuccessLogin() {
-        UserCreator userCreator = new UserCreator();
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
-        LoginForm loginForm = homePage.getHeaderMenu().openLoginForm();
-        Assert.assertTrue(loginForm.isLoginFormPresent(), "Login form is not present");
-        loginForm.login(userCreator);
-        Assert.assertEquals(homePage.getHeaderMenu().getUserNickname(), R.TESTDATA.get("nickname"), "Icon LogOut is not present");
-    }
 
     @Test(description = "JIRA#AUTO-0003")
     @MethodOwner(owner = "Kolchyba Yevhenii")
@@ -227,5 +212,22 @@ public class GsmArenaTest extends AbstractTest {
         opinionPage.clickCommentVoteDown();
         int unRatingBefore = opinionPage.getNumberUnRating();
         Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
+    }
+
+    @Test(description = "JIRA#AUTO-0011", dataProvider = "DataProvider")
+    @MethodOwner(owner = "Kolchyba Yevhenii")
+    @CsvDataSourceParameters(path = "csv/input_user_credential.csv", dsUid = "TUID")
+    public void verifyUserLogin(HashMap<String, String> inputUserCredential) {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        LoginForm loginForm = homePage.getHeaderMenu().openLoginForm();
+        Assert.assertTrue(loginForm.isLoginFormPresent(), "Login form is not present");
+        String typeUserEmail = inputUserCredential.get("email");
+        String typeUserPassword = inputUserCredential.get("password");
+        loginForm.inputEmail(typeUserEmail);
+        loginForm.inputPassword(typeUserPassword);
+        loginForm.clickSubmitBtn();
+        Assert.assertEquals(homePage.getHeaderMenu().getUserNickname(),R.TESTDATA.get("nickname"),"User is not logged");
     }
 }

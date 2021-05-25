@@ -1,8 +1,8 @@
 package com.qaprosoft.carina.demo.gui.service;
 
 import com.qaprosoft.carina.core.foundation.webdriver.IDriverPool;
+import com.qaprosoft.carina.demo.gui.components.LoginForm;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.LoginForm;
 import org.testng.Assert;
 
 public class LoginService implements IDriverPool {
@@ -13,7 +13,7 @@ public class LoginService implements IDriverPool {
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
 
         LoginForm loginForm = homePage.getHeaderMenu().openLoginForm();
-        loginForm.login(user);
+//        loginForm.login(user);
         Assert.assertTrue(loginForm.isLoginFormPresent(), "User wasn't login on website");
         return new HomePage(getDriver());
     }
