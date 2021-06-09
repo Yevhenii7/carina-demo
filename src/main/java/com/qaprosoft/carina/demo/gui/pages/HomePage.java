@@ -37,6 +37,9 @@ public class HomePage extends AbstractPage {
     @FindBy(id = "header")
     private HeaderMenu header;
 
+    @FindBy(id = "header")
+    private HeaderMenu2 headers;
+
     @FindBy(xpath = "//div[contains(@class, 'brandmenu-v2')]//a")
     private List<ExtendedWebElement> brandLinks;
 
@@ -58,6 +61,10 @@ public class HomePage extends AbstractPage {
 
     public HeaderMenu getHeaderMenu() {
         return header;
+    }
+
+    public HeaderMenu2 getHeaderMenu2() {
+        return headers;
     }
 
     public PhoneFinderMenu getPhoneFinderMenu() {

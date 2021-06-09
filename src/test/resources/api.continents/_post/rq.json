@@ -1,0 +1,3 @@
+{
+  "query": "{ continents { name, code } countries{name, phone}} "
+}

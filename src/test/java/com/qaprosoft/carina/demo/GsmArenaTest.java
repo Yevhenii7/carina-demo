@@ -1,18 +1,14 @@
 package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoConsole;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.dataprovider.annotations.XlsDataSourceParameters;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.components.BurgerMenu;
-import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
-import com.qaprosoft.carina.demo.gui.components.ModelItem;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.service.LoginService;
-import com.qaprosoft.carina.demo.gui.service.UserCreator;
+import com.qaprosoft.carina.demo.gui.service.UserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
@@ -51,7 +47,7 @@ public class GsmArenaTest extends AbstractTest {
     @Test(description = "JIRA#AUTO-0002")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySuccessLogin() {
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -64,7 +60,7 @@ public class GsmArenaTest extends AbstractTest {
     @Test(description = "JIRA#AUTO-0003")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidEmail() {
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -77,7 +73,7 @@ public class GsmArenaTest extends AbstractTest {
     @Test(description = "JIRA#AUTO-0004")
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyLoginWithInvalidPassword() {
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -91,7 +87,7 @@ public class GsmArenaTest extends AbstractTest {
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifyArticleNameTest() {
         LoginService loginService = new LoginService();
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = loginService.login(userCreator);
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
@@ -106,7 +102,7 @@ public class GsmArenaTest extends AbstractTest {
     @MethodOwner(owner = "Kolchyba Yevhenii")
     public void verifySearchingProcessTest(String searchQ) {
         LoginService loginService = new LoginService();
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = loginService.login(userCreator);
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
@@ -207,7 +203,7 @@ public class GsmArenaTest extends AbstractTest {
     @CsvDataSourceParameters(path = "csv/search_key_information", dsUid = "TUID")
     public void verifyOpinionsOnPhonePageTest(HashMap<String, String> searchInfo) {
         LoginService loginService = new LoginService();
-        UserCreator userCreator = new UserCreator();
+        UserService userCreator = new UserService();
         HomePage homePage = loginService.login(userCreator);
         String search = searchInfo.get("brand");
         BrandModelsPage productsPage = homePage.selectBrand(search);
@@ -223,9 +219,9 @@ public class GsmArenaTest extends AbstractTest {
         opinionPage.clickCommentVoteUp();
         int ratingAfter = opinionPage.getNumberRating();
         Assert.assertTrue(ratingBefore < ratingAfter, "Comment is not rated");
-        int unRatingAfter = opinionPage.getNumberUnRating();
+        int unRatingAfter = opinionPage.getNumberRating();
         opinionPage.clickCommentVoteDown();
-        int unRatingBefore = opinionPage.getNumberUnRating();
+        int unRatingBefore = opinionPage.getNumberRating();
         Assert.assertTrue(unRatingAfter > unRatingBefore, "Comment is not unrated");
     }
 }

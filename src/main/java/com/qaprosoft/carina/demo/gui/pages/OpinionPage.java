@@ -28,6 +28,9 @@ public class OpinionPage extends AbstractPage {
     @FindBy(xpath = "(//select[@name='nSortNew']//option[text()='Best rating'])[1]")
     private ExtendedWebElement bestRating;
 
+    @FindBy(xpath = "(//select[@name='nSortNew']//option[text()='Newest first'])[1]")
+    private ExtendedWebElement newestFirst;
+
     @FindBy(xpath = "//span[@class='thumbs-score']")
     private List<ExtendedWebElement> ratingScore;
 
@@ -74,6 +77,10 @@ public class OpinionPage extends AbstractPage {
         LOGGER.info("Title 'best rating' selected");
     }
 
+    public void clickSortByNewestFirst() {
+        newestFirst.click();
+    }
+
     public boolean isOpinionsSortedByBestRating() {
         List<Integer> ratings = ratingScore.stream()
                 .map(x -> Integer.valueOf(String.valueOf(x))).collect(Collectors.toList());
@@ -106,11 +113,5 @@ public class OpinionPage extends AbstractPage {
         String ratingNumber = scoreRating.getText();
         LOGGER.info("Rating before " + ratingNumber);
         return Integer.parseInt(ratingNumber);
-    }
-
-    public int getNumberUnRating() {
-        String unRatingNumber = scoreRating.getText();
-        LOGGER.info("Rating before " + unRatingNumber);
-        return Integer.parseInt(unRatingNumber);
     }
 }

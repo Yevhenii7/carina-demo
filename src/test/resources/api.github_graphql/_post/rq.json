@@ -1,0 +1,2 @@
+{"query": "mutation AddReactionToIssue {\n  addReaction(input:{subjectId:\"MDU6SXNzdWU4OTY4NDMwMjM=\",content:EYES}) {\n    reaction {\n      content\n    }\n    subject {\n      id\n    }\n  }\n}"
+}
