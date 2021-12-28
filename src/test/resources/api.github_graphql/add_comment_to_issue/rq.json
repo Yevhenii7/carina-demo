@@ -1,0 +1,6 @@
+{
+  "query": "mutation ($myVar: AddReactionInput!) {\n  addReaction(input: $myVar) {\n    reaction {\n      content\n    }\n    subject {\n      id\n    }\n  }\n}\n",
+  "variables": {"myVar": {"subjectId": "MDU6SXNzdWU5MTcxMjQwMTk=", "content": "CONFUSED"}}
+
+
+}

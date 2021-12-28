@@ -1,0 +1,12 @@
+{
+  "data": {
+    "addComment": {
+      "commentEdge": {
+        "cursor": "skip"
+      },
+      "subject": {
+        "id": "MDU6SXNzdWU5MTcxMjQwMTk="
+      }
+    }
+  }
+}

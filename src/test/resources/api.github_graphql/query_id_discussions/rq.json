@@ -1,0 +1,4 @@
+{
+  "query": "query GetIdDiscussions{\n  repository(owner: \"Yevhenii7\", name: \"test-git\") {\n    discussionCategories(first: 1) {\n     edges{\n      node {\n        id\n        name\n      }\n    }\n  }\n}\n}",
+  "operationName": "GetIdDiscussions"
+}

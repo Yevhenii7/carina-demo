@@ -2,12 +2,12 @@ package com.qaprosoft.carina.demo.gui.service;
 
 import com.qaprosoft.carina.core.foundation.webdriver.IDriverPool;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.LoginForm;
+import com.qaprosoft.carina.demo.gui.components.LoginForm;
 import org.testng.Assert;
 
 public class LoginService implements IDriverPool {
 
-    public HomePage login(UserCreator user) {
+    public HomePage login(UserService user) {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");

@@ -1,0 +1,16 @@
+{
+  "data": {
+    "repository": {
+      "discussionCategories": {
+        "edges": [
+          {
+            "node": {
+              "id": "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDIxODAw",
+              "name": "Announcements"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

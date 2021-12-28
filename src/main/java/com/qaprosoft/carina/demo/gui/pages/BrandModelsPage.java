@@ -39,7 +39,7 @@ public class BrandModelsPage extends AbstractPage {
     @FindBy(xpath = "//li[@class='article-info-meta-link help help-sort-popularity']")
     private ExtendedWebElement linkPopularity;
 
-    @FindBy(xpath = "//div[@class='makers']/ul/li/a[1]")
+    @FindBy(xpath = "//div[@class='makers']/ul/li[1]")
     private ExtendedWebElement linkFirstPhone;
 
     public BrandModelsPage(WebDriver driver) {

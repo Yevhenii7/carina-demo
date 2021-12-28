@@ -3,12 +3,12 @@ package com.qaprosoft.carina.demo.gui.service;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.demo.gui.model.User;
 
-public class UserCreator {
+public class UserService {
 
     public User getUser() {
         User user = new User();
         user.setEmail(R.TESTDATA.get("email"));
-        user.setPassword(R.TESTDATA.get("password"));
+        user.setPassword(R.TESTDATA.getDecrypted("password"));
         return user;
     }
 

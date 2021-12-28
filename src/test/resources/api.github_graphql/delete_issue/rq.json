@@ -1,0 +1,4 @@
+{
+  "query": "mutation  CreateIssue{\n createIssue(input: {repositoryId:\"MDEwOlJlcG9zaXRvcnkzNzI4NTk5MDA=\", title:\"Hello\"}){\n   issue{\n    title\n  }\n  } \n  }\n\n",
+  "operationName": "CreateIssue"
+}
