@@ -1,0 +1,4 @@
+{
+  "query": "mutation  AddCommentToIssue{\n addComment(input: {subjectId:\"MDU6SXNzdWU5MTcxMjQwMTk=\",body:\"Hello\"}) {\n      commentEdge{\n        cursor\n      }\n    subject {\n      id\n    }\n  }\n}\n",
+  "operationName": "AddCommentToIssue"
+}

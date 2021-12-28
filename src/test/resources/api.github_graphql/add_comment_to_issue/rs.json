@@ -1,0 +1,12 @@
+{
+  "data": {
+    "addReaction": {
+      "reaction": {
+        "content": "CONFUSED"
+      },
+      "subject": {
+        "id": "MDU6SXNzdWU5MTcxMjQwMTk="
+      }
+    }
+  }
+}

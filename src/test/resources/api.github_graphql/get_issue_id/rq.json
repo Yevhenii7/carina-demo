@@ -1,0 +1,3 @@
+{
+  "query": "query FindIssueID {\n  repository(owner:\"Yevhenii7\", name:\"test\") {\n    issue(number:1) {\n      id\n    }\n  }\n}"
+}

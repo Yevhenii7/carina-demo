@@ -1,0 +1,4 @@
+{
+  "query": "query FindIssueID {\n  repository(owner:\"Yevhenii7\", name:\"test-git\") {\n    issue(number:1) {\n      id\n    }\n  }\n}",
+  "operationName": "FindIssueID"
+}
